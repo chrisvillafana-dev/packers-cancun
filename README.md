@@ -4,10 +4,14 @@ Landing page + 5 secciones (Partidos, Reels, Categorías, Stats, Únete a Nosotr
 
 ## Sobre el stack (nota importante)
 
+Pediste "HTML5 con JAVA y TS". **Java** (el lenguaje de Android/backends) no aplica aquí — no tiene ningún rol en un sitio web como este, y mezclarlo solo añadiría complejidad sin beneficio. Lo que sí construí, y que asumo era la intención real, es:
+
 - **HTML5** semántico para la estructura
 - **CSS3** con variables (custom properties) para el sistema de colores/tipografías
 - **TypeScript (TS)** para toda la lógica: menú, animaciones, y sobre todo la carga de contenido (noticias, partidos, categorías, stats) desde archivos de datos
 - **Vite** como herramienta de desarrollo: es lo que hace que TypeScript funcione en el navegador, con recarga instantánea mientras editas en Cursor
+
+Si en algún momento quieres una parte del sitio con backend real (por ejemplo, un panel de administrador con login para cargar noticias sin tocar código), ahí sí tendría sentido un lenguaje de servidor — Java sería una opción, pero Node.js/TypeScript (el mismo lenguaje del frontend) suele ser más simple de mantener para un equipo pequeño. Podemos cruzar ese puente cuando llegue el momento.
 
 ## Estructura del proyecto
 
@@ -48,6 +52,10 @@ packers-cancun/
 
 **Importante:** no abras `index.html` haciendo doble clic desde el explorador de archivos. El sitio necesita un servidor (aunque sea local) para cargar los estilos, el TypeScript y los archivos de contenido JSON. `npm run dev` te da ese servidor.
 
+## Categorías actuales
+
+Ya están cargadas: **Under 6, Under 8, Under 14, Mixto Libre y Mixto Master** (`public/data/categories.json`). Cuando quieras sumar una categoría nueva, agrega un objeto más al arreglo con el mismo formato — se muestra sola tanto en `/categorias.html` como en la franja de chips del inicio (esa franja sí está escrita directo en `index.html`, así que si agregas una categoría nueva ahí también edita esa lista de 6 líneas para que aparezca como chip).
+
 ## 2. Cómo agregar contenido constantemente (sin tocar el diseño)
 
 Todo el contenido dinámico vive en `public/data/*.json`. Edita esos archivos y el sitio se actualiza solo:
@@ -76,13 +84,9 @@ Sube la foto a `public/images/mi-foto.jpg` y listo — no hay que tocar HTML ni 
 
 ## 3. La imagen de fondo del estadio
 
-El hero ya está listo para recibir tu foto: solo coloca un archivo llamado **`stadium-hero.jpg`** dentro de `public/assets/`. Mientras no exista, el sitio muestra automáticamente un degradado que simula luces de estadio de noche (para que nunca se vea roto).
+Ya está integrada: `public/assets/stadium-hero.jpg` es la foto que nos diste (el estadio de noche con "Packers Cancún" pintado en la zona de anotación). Por eso quité el texto en perspectiva que antes generaba con CSS — ya no hacía falta, la foto trae el rótulo real. En su lugar, agregué el nombre del equipo como encabezado normal arriba (en la zona oscura del cielo), para que se lea siempre completo aunque en pantallas angostas (celular) la foto recorte por los lados y no se alcance a ver el rótulo completo pintado en el pasto.
 
-No puedo generarte o incrustar directamente una fotografía de stock por temas de derechos de autor, pero te recomiendo:
-- Buscar en **Unsplash** o **Pexels** (uso gratuito) términos como *"empty football stadium night lights"* o *"american football field night"*.
-- Idealmente una toma con perspectiva baja, viendo el campo hacia el frente — así el texto de la zona de anotación (que ya está en el código, no en la foto) se alinea bien encima.
-
-El texto **"Packers Cancún"** en la zona de anotación NO es parte de la imagen — está hecho con CSS (una transformación de perspectiva 3D), así que se ve bien sin importar qué foto de estadio uses, y puedes cambiar el texto sin editar ninguna imagen.
+Si en el futuro quieres cambiar esta foto, solo reemplaza el archivo `public/assets/stadium-hero.jpg` por otro con el mismo nombre — el degradado que oscurece la parte de arriba (para que el logo y el texto se lean bien) se ajusta solo.
 
 ## 4. El logo
 
@@ -138,5 +142,5 @@ Las imágenes ligeras (fotos de noticias, categorías) están bien subiéndolas 
 
 - **Paleta:** verde selva casi negro de fondo, oro envejecido como acento (tomado directo de tu escudo) y un jade verde como color secundario — referencia a la piedra de jade maya, no es un verde cualquiera de "equipo deportivo genérico".
 - **Tipografías:** una condensada deportiva (Anton) para títulos grandes, una serif ceremonial (Cinzel) para etiquetas y acentos —inspirada en cómo se "talla" el texto en tu logo— y una sans limpia (Work Sans) para todo el texto de lectura. Los números de stats usan una cuarta, más técnica (Rajdhani), como un marcador digital.
-- **El elemento firma del sitio:** el texto "Packers Cancún" en la zona de anotación no es una imagen — es tipografía real con una transformación 3D en CSS que simula estar pintada sobre el pasto, vista exactamente desde el ángulo que pediste (detrás de la zona de anotación, de noche). Es único de este sitio, no una plantilla genérica.
+- **El elemento firma del sitio:** tu propia foto del estadio con "Packers Cancún" pintado en la zona de anotación, exactamente desde el ángulo que pediste. El degradado sobre la imagen está calculado a propósito para oscurecer solo la zona de las luces (arriba, donde va nuestro logo y encabezado) y dejar casi intacto el campo y el rótulo real de abajo — nada de plantilla genérica.
 - **Animaciones:** todos los botones usan una curva de aceleración suave (`cubic-bezier`) en vez de transiciones lineales, y el sitio respeta la preferencia de "reducir movimiento" del sistema operativo del visitante.

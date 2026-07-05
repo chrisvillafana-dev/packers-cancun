@@ -11,7 +11,7 @@ export interface Game {
   id: string;
   date: string;
   time: string;
-  category: string; // ej. "Varonil Libre"
+  category: string; // ej. "Mixto Libre"
   opponent: string;
   location: string;
   status: "proximo" | "jugado";

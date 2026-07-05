@@ -1,30 +1,37 @@
 [
   {
     "id": "c1",
-    "name": "Varonil Libre",
-    "description": "Nuestra categoría insignia, compite en la liga local los fines de semana. Roster abierto todo el año.",
-    "schedule": "Entrenos: martes y jueves 8:00 PM",
-    "image": ""
-  },
-  {
-    "id": "c2",
-    "name": "Femenil",
-    "description": "Equipo en crecimiento con jugadoras de todos los niveles, desde principiantes hasta veteranas de liga.",
+    "name": "Under 6",
+    "description": "Primer contacto con el tocho bandera: reglas básicas, coordinación y mucha diversión para los más pequeños del equipo.",
     "schedule": "Entrenos: sábados 9:00 AM",
     "image": ""
   },
   {
+    "id": "c2",
+    "name": "Under 8",
+    "description": "Refuerzo de fundamentos (recibir, correr rutas, quitar banderas) y primeros partidos amistosos entre clubes.",
+    "schedule": "Entrenos: sábados 10:00 AM",
+    "image": ""
+  },
+  {
     "id": "c3",
-    "name": "Mixto",
-    "description": "Categoría recreativa y competitiva a la vez, ideal para quienes buscan comunidad y buen ambiente.",
-    "schedule": "Entrenos: miércoles 7:30 PM",
+    "name": "Under 14",
+    "description": "Categoría juvenil: desarrollo técnico y táctico más serio, trabajo en equipo y preparación para el tocho competitivo.",
+    "schedule": "Entrenos: martes y jueves 6:00 PM",
     "image": ""
   },
   {
     "id": "c4",
-    "name": "Juvenil",
-    "description": "Formando a la próxima generación de Packers, de 13 a 17 años, con enfoque en fundamentos y disciplina.",
-    "schedule": "Entrenos: sábados 11:00 AM",
+    "name": "Mixto Libre",
+    "description": "Nuestra categoría competitiva de adultos, hombres y mujeres en la misma cancha. Compite en la liga local los fines de semana.",
+    "schedule": "Entrenos: martes y jueves 8:00 PM",
+    "image": ""
+  },
+  {
+    "id": "c5",
+    "name": "Mixto Master",
+    "description": "Para jugadores y jugadoras +35: ambiente competitivo pero relajado, con toda la experiencia del equipo.",
+    "schedule": "Entrenos: miércoles 7:30 PM",
     "image": ""
   }
 ]
