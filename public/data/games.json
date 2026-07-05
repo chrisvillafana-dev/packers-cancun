@@ -1,0 +1,46 @@
+{
+  "proximos": [
+    {
+      "id": "g1",
+      "date": "2026-07-12",
+      "time": "17:00",
+      "category": "Varonil Libre",
+      "opponent": "Halcones Puerto Morelos",
+      "location": "Unidad Deportiva Kabah, Cancún",
+      "status": "proximo"
+    },
+    {
+      "id": "g2",
+      "date": "2026-07-19",
+      "time": "10:00",
+      "category": "Femenil",
+      "opponent": "Jaguaras Playa del Carmen",
+      "location": "Unidad Deportiva Kabah, Cancún",
+      "status": "proximo"
+    }
+  ],
+  "resultados": [
+    {
+      "id": "g3",
+      "date": "2026-06-24",
+      "time": "18:00",
+      "category": "Varonil Libre",
+      "opponent": "Tiburones Isla Mujeres",
+      "location": "Unidad Deportiva Kabah, Cancún",
+      "status": "jugado",
+      "result": "Packers 28 - 14",
+      "outcome": "victoria"
+    },
+    {
+      "id": "g4",
+      "date": "2026-06-10",
+      "time": "18:00",
+      "category": "Mixto",
+      "opponent": "Cocodrilos Bacalar",
+      "location": "Cancha Chetumal",
+      "status": "jugado",
+      "result": "Packers 12 - 20",
+      "outcome": "derrota"
+    }
+  ]
+}

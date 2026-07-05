@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Únete a Nosotros — Packers Cancún</title>
+  <meta name="description" content="Forma parte de Packers Cancún, equipo local de tocho bandera. Deja tus datos y te contactamos." />
+  <link rel="icon" type="image/png" href="/assets/favicon-256.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+</head>
+<body>
+
+  <header class="site-nav" data-site-nav>
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand">
+        <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+        <span>Packers Cancún</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" data-nav-links>
+          <li><a href="/index.html">Inicio</a></li>
+          <li><a href="/partidos.html">Partidos</a></li>
+          <li><a href="/reels.html">Reels</a></li>
+          <li><a href="/categorias.html">Categorías</a></li>
+          <li><a href="/stats.html">Stats</a></li>
+          <li><a href="/unete.html">Únete a Nosotros</a></li>
+        </ul>
+      </nav>
+      <a href="/unete.html" class="btn nav-cta">Únete</a>
+      <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Roster abierto</span>
+      <h1 class="section-title">Únete a Nosotros</h1>
+      <p>Sin experiencia previa, con experiencia, jugadores o jugadoras: cuéntanos de ti y te contactamos para tu primer entrenamiento de prueba.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="card form-card reveal">
+        <form data-join-form novalidate>
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="edad">Edad</label>
+            <input id="edad" name="edad" type="number" min="10" max="80" required />
+          </div>
+
+          <div class="field">
+            <label for="categoria">Categoría de tu interés</label>
+            <select id="categoria" name="categoria" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Varonil Libre</option>
+              <option>Femenil</option>
+              <option>Mixto</option>
+              <option>Juvenil</option>
+              <option>No estoy seguro/a</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="telefono">WhatsApp / Teléfono</label>
+            <input id="telefono" name="telefono" type="tel" required autocomplete="tel" />
+          </div>
+
+          <div class="field">
+            <label for="experiencia">¿Tienes experiencia jugando tocho bandera?</label>
+            <textarea id="experiencia" name="experiencia" rows="3" placeholder="Cuéntanos brevemente (opcional)"></textarea>
+          </div>
+
+          <button type="submit" class="btn" style="width:100%;">Enviar solicitud</button>
+
+          <div class="form-success" data-join-success>
+            ¡Gracias! Recibimos tu solicitud, el cuerpo técnico te contactará pronto.
+          </div>
+
+          <p class="form-note">
+            Este formulario aún no está conectado a un correo real — revisa el README del proyecto para conectarlo en minutos con Formspree (gratis).
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+            <span>Packers Cancún</span>
+          </div>
+          <p style="color:var(--bone-200);opacity:.8;max-width:32ch;">Equipo local de tocho bandera. Verde, oro y raíz maya en cada jugada.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Secciones</h4>
+          <ul>
+            <li><a href="/partidos.html">Partidos</a></li>
+            <li><a href="/reels.html">Reels</a></li>
+            <li><a href="/categorias.html">Categorías</a></li>
+            <li><a href="/stats.html">Stats</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Equipo</h4>
+          <ul>
+            <li><a href="/unete.html">Únete a nosotros</a></li>
+            <li><a href="/index.html#noticias">Noticias</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:contacto@packerscancun.mx">contacto@packerscancun.mx</a></li>
+            <li><a href="https://instagram.com/" target="_blank" rel="noopener">@packerscancun</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Packers Cancún. Todos los derechos reservados.</span>
+        <span>Cancún, Quintana Roo, México</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/ts/unete.ts"></script>
+</body>
+</html>

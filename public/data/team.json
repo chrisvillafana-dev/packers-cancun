@@ -1,0 +1,12 @@
+[
+  {
+    "id": "p1",
+    "nombre": "Nombre del jugador",
+    "numero": "00",
+    "posicion": "QB",
+    "categoria": "Varonil Libre",
+    "bio": "Escribe aquí la biografía corta del jugador: trayectoria, logros, por qué juega tocho bandera.",
+    "foto": "",
+    "videoFondo": ""
+  }
+]

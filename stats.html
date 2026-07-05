@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stats — Packers Cancún</title>
+  <meta name="description" content="Estadísticas de jugadores y equipo de Packers Cancún." />
+  <link rel="icon" type="image/png" href="/assets/favicon-256.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+</head>
+<body>
+
+  <header class="site-nav" data-site-nav>
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand">
+        <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+        <span>Packers Cancún</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" data-nav-links>
+          <li><a href="/index.html">Inicio</a></li>
+          <li><a href="/partidos.html">Partidos</a></li>
+          <li><a href="/reels.html">Reels</a></li>
+          <li><a href="/categorias.html">Categorías</a></li>
+          <li><a href="/stats.html">Stats</a></li>
+          <li><a href="/unete.html">Únete a Nosotros</a></li>
+        </ul>
+      </nav>
+      <a href="/unete.html" class="btn nav-cta">Únete</a>
+      <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Números</span>
+      <h1 class="section-title">Estadísticas</h1>
+      <p>Touchdowns, intercepciones y partidos jugados por categoría. Se llena conforme avanza la temporada.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="stats-table-wrap reveal">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Categoría</th>
+              <th>Touchdowns</th>
+              <th>Intercepciones</th>
+              <th>Partidos jugados</th>
+            </tr>
+          </thead>
+          <tbody data-stats-body>
+            <tr><td colspan="5">Cargando estadísticas…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+            <span>Packers Cancún</span>
+          </div>
+          <p style="color:var(--bone-200);opacity:.8;max-width:32ch;">Equipo local de tocho bandera. Verde, oro y raíz maya en cada jugada.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Secciones</h4>
+          <ul>
+            <li><a href="/partidos.html">Partidos</a></li>
+            <li><a href="/reels.html">Reels</a></li>
+            <li><a href="/categorias.html">Categorías</a></li>
+            <li><a href="/stats.html">Stats</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Equipo</h4>
+          <ul>
+            <li><a href="/unete.html">Únete a nosotros</a></li>
+            <li><a href="/index.html#noticias">Noticias</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:contacto@packerscancun.mx">contacto@packerscancun.mx</a></li>
+            <li><a href="https://instagram.com/" target="_blank" rel="noopener">@packerscancun</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Packers Cancún. Todos los derechos reservados.</span>
+        <span>Cancún, Quintana Roo, México</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/ts/stats.ts"></script>
+</body>
+</html>

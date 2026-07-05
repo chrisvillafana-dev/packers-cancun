@@ -1,0 +1,26 @@
+[
+  {
+    "id": "n1",
+    "date": "2026-07-01",
+    "tag": "Convocatoria",
+    "title": "Abrimos tryouts para la categoría Varonil Libre",
+    "excerpt": "Buscamos quarterbacks, receptores y rushers para completar el roster de la temporada de otoño. Trae tus tenis de tocho y muchas ganas.",
+    "image": ""
+  },
+  {
+    "id": "n2",
+    "date": "2026-06-24",
+    "tag": "Resultado",
+    "title": "Packers Cancún vence 28-14 en la jornada 3",
+    "excerpt": "Gran actuación defensiva en la zona roja y dos intercepciones clave que sellaron el partido en el último cuarto.",
+    "image": ""
+  },
+  {
+    "id": "n3",
+    "date": "2026-06-15",
+    "tag": "Aviso",
+    "title": "Nuevo horario de entrenamientos en la Liga MX de Tocho",
+    "excerpt": "A partir de julio entrenamos martes y jueves 8:00 PM en la unidad deportiva. Categoría femenil se suma los sábados por la mañana.",
+    "image": ""
+  }
+]

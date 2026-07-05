@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packers Cancún — Equipo de Tocho Bandera</title>
+  <meta name="description" content="Sitio oficial de Packers Cancún, equipo local de tocho bandera. Noticias, partidos, categorías, estadísticas y cómo unirte al equipo." />
+  <link rel="icon" type="image/png" href="/assets/favicon-256.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+</head>
+<body>
+
+  <header class="site-nav" data-site-nav>
+    <div class="container nav-inner">
+      <a href="/index.html" class="brand">
+        <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+        <span>Packers Cancún</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" data-nav-links>
+          <li><a href="/index.html">Inicio</a></li>
+          <li><a href="/partidos.html">Partidos</a></li>
+          <li><a href="/reels.html">Reels</a></li>
+          <li><a href="/categorias.html">Categorías</a></li>
+          <li><a href="/stats.html">Stats</a></li>
+          <li><a href="/unete.html">Únete a Nosotros</a></li>
+        </ul>
+      </nav>
+
+      <a href="/unete.html" class="btn nav-cta">Únete</a>
+
+      <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO: cancha vista desde atrás de la zona de anotación, de noche.
+       Sustituye /public/assets/stadium-hero.jpg por tu foto real
+       (ver README para recomendaciones de dónde conseguirla). -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="Estadio de tocho bandera vacío de noche con las luces encendidas"></div>
+    <div class="hero-content">
+      <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" class="hero-emblem" />
+
+      <div class="endzone">
+        <p class="endzone-text">Packers Cancún</p>
+        <div class="endzone-lines"></div>
+      </div>
+
+      <p class="hero-tagline">Tocho bandera con garra maya. El equipo local que representa a Cancún dentro y fuera de la cancha.</p>
+
+      <div class="hero-actions">
+        <a href="/unete.html" class="btn">Únete al equipo</a>
+        <a href="/partidos.html" class="btn btn-outline">Ver próximos partidos</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span>Desliza</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <!-- Categorías que se juegan -->
+  <div class="category-strip">
+    <div class="container">
+      <a href="/categorias.html" class="chip"><span class="dot"></span> Varonil Libre</a>
+      <a href="/categorias.html" class="chip"><span class="dot"></span> Femenil</a>
+      <a href="/categorias.html" class="chip"><span class="dot"></span> Mixto</a>
+      <a href="/categorias.html" class="chip"><span class="dot"></span> Juvenil</a>
+      <a href="/categorias.html" class="chip"><span class="dot"></span> Ver todas las categorías →</a>
+    </div>
+  </div>
+
+  <!-- Tablero de noticias -->
+  <section class="board" id="noticias">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Tablero del equipo</span>
+          <h2 class="section-title">Últimas jugadas</h2>
+        </div>
+        <p>Convocatorias, resultados y avisos importantes. Se actualiza directo desde un archivo de datos, sin tocar el diseño.</p>
+      </div>
+
+      <div class="board-grid" data-news-grid>
+        <p class="news-empty">Cargando noticias…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redes sociales -->
+  <section class="social">
+    <div class="container">
+      <span class="eyebrow">Síguenos</span>
+      <h2 class="section-title">La cancha también es digital</h2>
+      <div class="social-row">
+        <a class="social-link" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="social-link" href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+        <a class="social-link" href="https://tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+        <a class="social-link" href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
+            <span>Packers Cancún</span>
+          </div>
+          <p style="color:var(--bone-200);opacity:.8;max-width:32ch;">Equipo local de tocho bandera. Verde, oro y raíz maya en cada jugada.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Secciones</h4>
+          <ul>
+            <li><a href="/partidos.html">Partidos</a></li>
+            <li><a href="/reels.html">Reels</a></li>
+            <li><a href="/categorias.html">Categorías</a></li>
+            <li><a href="/stats.html">Stats</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Equipo</h4>
+          <ul>
+            <li><a href="/unete.html">Únete a nosotros</a></li>
+            <li><a href="#noticias">Noticias</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="mailto:contacto@packerscancun.mx">contacto@packerscancun.mx</a></li>
+            <li><a href="https://instagram.com/" target="_blank" rel="noopener">@packerscancun</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Packers Cancún. Todos los derechos reservados.</span>
+        <span>Cancún, Quintana Roo, México</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/ts/home.ts"></script>
+</body>
+</html>
