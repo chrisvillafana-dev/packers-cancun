@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Packers CMS | Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./styles/variables.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/components.css">
+    <link rel="stylesheet" href="./styles/admin.css">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <section class="login-card">
+
+            <img src="/assets/logo-nav.png"
+                 alt="Packers Cancún"
+                 class="login-logo">
+
+            <h1>Packers CMS</h1>
+
+            <p>Inicia sesión para administrar el sitio web.</p>
+
+            <form id="login-form">
+
+                <label for="email">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="admin@packerscancun.com"
+                    required>
+
+                <label for="password">
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="••••••••"
+                    required>
+
+                <button type="submit" class="btn">
+
+                    Iniciar sesión
+
+                </button>
+
+                <p id="login-error"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+<script type="module" src="./ts/auth.ts"></script>
+
+</body>
+
+</html>

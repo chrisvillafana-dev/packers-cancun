@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img src="/assets/logo-nav.png">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li><a class="active">Dashboard</a></li>
+
+                <li><a href="#">Noticias</a></li>
+
+                <li><a href="#">Partidos</a></li>
+
+                <li><a href="#">Reels</a></li>
+
+                <li><a href="#">Galería</a></li>
+
+                <li><a href="#">Usuarios</a></li>
+
+                <li><a href="#">Configuración</a></li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Dashboard</h1>
+
+            <button class="btn" id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+        <section class="dashboard-home">
+
+            <h2 id="welcome-user">
+
+                Bienvenido
+
+            </h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h3>Noticias</h3>
+
+                    <strong>0</strong>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>Partidos</h3>
+
+                    <strong>0</strong>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>Reels</h3>
+
+                    <strong>0</strong>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <h3>Usuarios</h3>
+
+                    <strong>1</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module"
+        src="./ts/dashboard.ts"></script>
+
+</body>
+
+</html>
