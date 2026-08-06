@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Noticias | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img src="/assets/logo-nav.png">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li><a href="./dashboard.html">Dashboard</a></li>
+
+                <li><a class="active">Noticias</a></li>
+
+                <li><a href="#">Partidos</a></li>
+
+                <li><a href="#">Reels</a></li>
+
+                <li><a href="#">Galería</a></li>
+
+                <li><a href="#">Usuarios</a></li>
+
+                <li><a href="#">Configuración</a></li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Administrar Noticias</h1>
+
+            <button class="btn" id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+        <section class="dashboard-home">
+
+            <button class="btn" id="new-news-btn">
+        
+                + Nueva noticia
+        
+            </button>
+        
+            <br><br>
+
+            <input
+
+type="text"
+
+id="search-news"
+
+placeholder="Buscar noticia...">
+
+            <table>
+        
+                <thead>
+        
+                    <tr>
+        
+                        <th>Título</th>
+        
+                        <th>Fecha</th>
+        
+                        <th>Estado</th>
+        
+                        <th>Acciones</th>
+        
+                    </tr>
+        
+                </thead>
+        
+                <tbody id="news-table">
+        
+                </tbody>
+        
+            </table>
+
+            <div class="modal hidden" id="news-modal">
+
+                <div class="modal-content">
+            
+                    <h2>Nueva noticia</h2>
+            
+                    <form id="news-form">
+            
+                        <label>Título</label>
+            
+                        <input
+                            type="text"
+                            id="title"
+                            required>
+            
+                        <label>Descripción</label>
+            
+                        <textarea
+                            id="description"
+                            rows="5"
+                            required></textarea>
+            
+                        <label>Categoría</label>
+            
+                        <select id="category">
+            
+                            <option value="General">General</option>
+            
+                            <option value="Partidos">Partidos</option>
+            
+                            <option value="Eventos">Eventos</option>
+            
+                            <option value="Convocatoria">Convocatoria</option>
+            
+                        </select>
+            
+                        <label>
+            
+                            <input
+                                type="checkbox"
+                                id="published">
+            
+                            Publicar inmediatamente
+            
+                        </label>
+            
+                        <div class="modal-actions">
+            
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-news">
+            
+                                Cancelar
+            
+                            </button>
+            
+                            <button
+                                class="btn"
+                                type="submit">
+            
+                                Guardar noticia
+            
+                            </button>
+            
+                        </div>
+            
+                    </form>
+            
+                </div>
+            
+            </div>
+        
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module"
+        src="./ts/modules/news/news.ts"></script>
+
+</body>
+
+</html>

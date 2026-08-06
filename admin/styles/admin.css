@@ -143,3 +143,158 @@
     margin-top:12px;
     
     }
+
+    /* ========= MODAL ========= */
+
+.modal.hidden{
+    display:none;
+}
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.6);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.modal-content{
+
+    width:600px;
+
+    background:var(--color-surface);
+
+    border-radius:16px;
+
+    padding:32px;
+
+    border:1px solid var(--color-border);
+
+}
+
+.modal-content form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    margin-top:24px;
+
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select{
+
+    padding:12px;
+
+    border-radius:8px;
+
+    border:1px solid var(--color-border);
+
+    background:#111827;
+
+    color:white;
+
+}
+
+.modal-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    font-family:inherit;
+
+}
+
+.btn-edit,
+.btn-delete{
+
+border:none;
+
+cursor:pointer;
+
+padding:8px 12px;
+
+border-radius:8px;
+
+margin-right:8px;
+
+font-size:16px;
+
+}
+
+.btn-edit{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+.btn-delete{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:24px;
+
+    background:#111827;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+th{
+
+    background:#1f2937;
+
+    padding:16px;
+
+    text-align:left;
+
+}
+
+td{
+
+    padding:16px;
+
+    border-bottom:1px solid #374151;
+
+}
+
+tbody tr:hover{
+
+    background:#1b2435;
+
+}
