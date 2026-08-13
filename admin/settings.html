@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Configuración | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./reels.html">
+                        Reels
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./gallery.html">
+                        Galería
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./users.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./settings.html"
+                       class="active">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTENIDO -->
+
+    <main class="admin-content">
+
+
+        <header class="dashboard-header">
+
+            <h1>
+                Configuración del sitio
+            </h1>
+
+            <button
+                class="btn"
+                id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+
+        <section class="dashboard-home">
+
+
+            <form id="settings-form">
+
+
+                <h2>
+                    Información general
+                </h2>
+
+
+                <label>
+                    Nombre del equipo
+                </label>
+
+                <input
+                    type="text"
+                    id="team-name"
+                    required>
+
+
+                <label>
+                    Descripción
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="5"
+                    required></textarea>
+
+
+                <label>
+                    Ubicación
+                </label>
+
+                <input
+                    type="text"
+                    id="location">
+
+
+                <label>
+                    Correo de contacto
+                </label>
+
+                <input
+                    type="email"
+                    id="email">
+
+
+                <label>
+                    Teléfono
+                </label>
+
+                <input
+                    type="text"
+                    id="phone">
+
+
+                <h2>
+                    Redes sociales
+                </h2>
+
+
+                <label>
+                    Instagram
+                </label>
+
+                <input
+                    type="url"
+                    id="instagram">
+
+
+                <label>
+                    TikTok
+                </label>
+
+                <input
+                    type="url"
+                    id="tiktok">
+
+
+                <label>
+                    Facebook
+                </label>
+
+                <input
+                    type="url"
+                    id="facebook">
+
+
+                <label>
+                    Sitio web
+                </label>
+
+                <input
+                    type="url"
+                    id="website">
+
+
+                <h2>
+                    Estado del sitio
+                </h2>
+
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="site-active"
+                        checked>
+
+                    Sitio activo
+
+                </label>
+
+
+                <br>
+                <br>
+
+
+                <button
+                    type="submit"
+                    class="btn">
+
+                    Guardar configuración
+
+                </button>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/settings/settings.ts">
+</script>
+
+</body>
+
+</html>

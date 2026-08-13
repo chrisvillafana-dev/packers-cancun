@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Partidos | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles/variables.css">
+    <link rel="stylesheet" href="./styles/layout.css">
+    <link rel="stylesheet" href="./styles/components.css">
+    <link rel="stylesheet" href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img src="/assets/logo-nav.png">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li><a href="./dashboard.html">Dashboard</a></li>
+
+                <li><a href="./news.html">Noticias</a></li>
+
+                <li><a class="active">Partidos</a></li>
+
+                <li><a href="./reels.html">Reels</a></li>
+
+                <li><a href="gallery.html">Galería</a></li>
+
+                <li><a href="./users.html">Usuarios</a></li>
+
+                <li><a href="./settings.html">Configuración</a></li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Administrar Partidos</h1>
+
+            <button class="btn" id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+        <section class="dashboard-home">
+
+            <button class="btn" id="new-match-btn">
+
+                + Nuevo partido
+
+            </button>
+
+            <br><br>
+
+            <input
+                type="text"
+                id="search-match"
+                placeholder="Buscar partido...">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Rival</th>
+
+                        <th>Fecha</th>
+
+                        <th>Estado</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="matches-table">
+
+                </tbody>
+
+            </table>
+
+            <div class="modal hidden" id="match-modal">
+
+                <div class="modal-content">
+
+                    <h2>Nuevo Partido</h2>
+
+                    <form id="match-form">
+
+                        <label>Equipo Rival</label>
+
+                        <input
+                            type="text"
+                            id="rival"
+                            required>
+
+                        <label>Fecha</label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required>
+
+                        <label>Hora</label>
+
+                        <input
+                            type="time"
+                            id="time"
+                            required>
+
+                        <label>Lugar</label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            required>
+
+                        <label>Categoría</label>
+
+                        <select id="category">
+
+                            <option>Under 6</option>
+
+                            <option>Under 8</option>
+
+                            <option>Under 10</option>
+
+                            <option>Under 12</option>
+
+                            <option>Under 14</option>
+
+                            <option>Mixto Libre</option>
+
+                            <option>Mixto Master</option>
+
+                        </select>
+
+                        <label>Resultado</label>
+
+                        <input
+                            type="text"
+                            id="result"
+                            placeholder="Ej. 28 - 14">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="published">
+
+                            Publicar inmediatamente
+
+                        </label>
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-match">
+
+                                Cancelar
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="btn">
+
+                                Guardar Partido
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script
+type="module"
+src="./ts/modules/matches/matches.ts">
+
+</script>
+
+</body>
+
+</html>

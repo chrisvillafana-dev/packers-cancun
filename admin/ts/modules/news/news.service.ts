@@ -8,25 +8,15 @@ import {
     doc,
     query,
     orderBy,
-    serverTimestamp
+    serverTimestamp,
+    updateDoc
 } from "firebase/firestore";
 
 import type { News } from "./news.types";
 
-import { updateDoc } from "firebase/firestore";
-
-export async function editNews(id: string, news: Partial<News>) {
-
-    await updateDoc(
-
-        doc(db, "news", id),
-
-        news
-
-    );
-
-}
-
+/**
+ * Obtener todas las noticias
+ */
 export async function getNews() {
 
     const newsQuery = query(
@@ -38,21 +28,59 @@ export async function getNews() {
 
 }
 
-export async function removeNews(id: string) {
+/**
+ * Crear noticia
+ */
+export async function createNews(news: News) {
 
-    await deleteDoc(doc(db, "news", id));
+    await addDoc(
+        collection(db, "news"),
+        {
+            ...news,
+            createdAt: serverTimestamp()
+        }
+    );
 
 }
 
+/**
+ * Editar noticia
+ */
+export async function editNews(
+    id: string,
+    news: Partial<News>
+) {
+
+    await updateDoc(
+        doc(db, "news", id),
+        news
+    );
+
+}
+
+/**
+ * Eliminar noticia
+ */
+export async function removeNews(id: string) {
+
+    await deleteDoc(
+        doc(db, "news", id)
+    );
+
+}
+
+/**
+ * Publicar / Ocultar
+ */
 export async function togglePublished(
     id: string,
     value: boolean
-){
+) {
 
     await updateDoc(
-        doc(db,"news",id),
+        doc(db, "news", id),
         {
-            published:value
+            published: value
         }
     );
 

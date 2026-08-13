@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Usuarios | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./reels.html">
+                        Reels
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./gallery.html">
+                        Galería
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./users.html"
+                       class="active">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./settings.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==========================================
+         CONTENIDO
+    =========================================== -->
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Administrar Usuarios</h1>
+
+            <button
+                class="btn"
+                id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+
+        <section class="dashboard-home">
+
+
+            <!-- NUEVO USUARIO -->
+
+            <button
+                class="btn"
+                id="new-user-btn">
+
+                + Nuevo usuario
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <!-- BUSCADOR -->
+
+            <input
+                type="text"
+                id="search-user"
+                placeholder="Buscar usuario...">
+
+
+            <!-- TABLA -->
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nombre</th>
+
+                        <th>Correo</th>
+
+                        <th>Rol</th>
+
+                        <th>Estado</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="users-table">
+
+                </tbody>
+
+            </table>
+
+
+            <!-- ==========================================
+                 MODAL
+            =========================================== -->
+
+            <div
+                class="modal hidden"
+                id="user-modal">
+
+
+                <div class="modal-content">
+
+
+                    <h2 id="user-modal-title">
+                        Nuevo usuario
+                    </h2>
+
+
+                    <form id="user-form">
+
+
+                        <!-- NOMBRE -->
+
+                        <label>
+                            Nombre
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            required>
+
+
+                        <!-- CORREO -->
+
+                        <label>
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            required>
+
+
+                        <!-- ROL -->
+
+                        <label>
+                            Rol
+                        </label>
+
+                        <select id="role">
+
+                            <option value="admin">
+                                Administrador
+                            </option>
+
+                            <option value="editor">
+                                Editor
+                            </option>
+
+                            <option value="viewer">
+                                Visualizador
+                            </option>
+
+                        </select>
+
+
+                        <!-- ESTADO -->
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="active"
+                                checked>
+
+                            Usuario activo
+
+                        </label>
+
+
+                        <!-- BOTONES -->
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-user">
+
+                                Cancelar
+
+                            </button>
+
+
+                            <button
+                                class="btn"
+                                type="submit">
+
+                                Guardar usuario
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/users/users.ts">
+</script>
+
+</body>
+
+</html>

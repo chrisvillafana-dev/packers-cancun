@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Galería | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./reels.html">
+                        Reels
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./gallery.html"
+                       class="active">
+                        Galería
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./users.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./settings.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==========================================
+         CONTENIDO
+    =========================================== -->
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Administrar Galería</h1>
+
+            <button
+                class="btn"
+                id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+
+        <section class="dashboard-home">
+
+
+            <button
+                class="btn"
+                id="new-gallery-btn">
+
+                + Nueva imagen
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <input
+                type="text"
+                id="search-gallery"
+                placeholder="Buscar imagen...">
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Imagen</th>
+
+                        <th>Título</th>
+
+                        <th>Categoría</th>
+
+                        <th>Estado</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="gallery-table">
+
+                </tbody>
+
+            </table>
+
+
+            <!-- ==========================================
+                 MODAL
+            =========================================== -->
+
+            <div
+                class="modal hidden"
+                id="gallery-modal">
+
+
+                <div class="modal-content">
+
+
+                    <h2>
+                        Nueva imagen
+                    </h2>
+
+
+                    <form id="gallery-form">
+
+
+                        <label>
+                            Título
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            required>
+
+
+                        <label>
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="5"
+                            required></textarea>
+
+
+                        <label>
+                            URL de la imagen
+                        </label>
+
+                        <input
+                            type="url"
+                            id="image-url"
+                            placeholder="https://..."
+                            required>
+
+
+                        <label>
+                            Categoría
+                        </label>
+
+                        <select id="category">
+
+                            <option value="General">
+                                General
+                            </option>
+
+                            <option value="Partidos">
+                                Partidos
+                            </option>
+
+                            <option value="Entrenamientos">
+                                Entrenamientos
+                            </option>
+
+                            <option value="Eventos">
+                                Eventos
+                            </option>
+
+                            <option value="Equipo">
+                                Equipo
+                            </option>
+
+                        </select>
+
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="published">
+
+                            Publicar inmediatamente
+
+                        </label>
+
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-gallery">
+
+                                Cancelar
+
+                            </button>
+
+
+                            <button
+                                class="btn"
+                                type="submit">
+
+                                Guardar imagen
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/gallery/gallery.ts">
+</script>
+
+</body>
+
+</html>

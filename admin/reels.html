@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Reels | Packers CMS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="./styles/variables.css">
+
+    <link rel="stylesheet"
+          href="./styles/layout.css">
+
+    <link rel="stylesheet"
+          href="./styles/components.css">
+
+    <link rel="stylesheet"
+          href="./styles/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún">
+
+            <div>
+
+                <h2>Packers CMS</h2>
+
+                <span>Administración</span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./reels.html"
+                       class="active">
+                        Reels
+                    </a>
+                </li>
+
+                <li>
+                    <a href="gallery.html">
+                        Galería
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./users.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./settings.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==========================================
+         CONTENIDO
+    =========================================== -->
+
+    <main class="admin-content">
+
+        <header class="dashboard-header">
+
+            <h1>Administrar Reels</h1>
+
+            <button
+                class="btn"
+                id="logout-btn">
+
+                Cerrar sesión
+
+            </button>
+
+        </header>
+
+
+        <section class="dashboard-home">
+
+
+            <!-- NUEVO REEL -->
+
+            <button
+                class="btn"
+                id="new-reel-btn">
+
+                + Nuevo Reel
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <!-- BUSCADOR -->
+
+            <input
+                type="text"
+                id="search-reel"
+                placeholder="Buscar reel...">
+
+
+            <!-- TABLA -->
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Título</th>
+
+                        <th>Plataforma</th>
+
+                        <th>Enlace</th>
+
+                        <th>Estado</th>
+
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="reels-table">
+
+                </tbody>
+
+            </table>
+
+
+            <!-- ==========================================
+                 MODAL
+            =========================================== -->
+
+            <div
+                class="modal hidden"
+                id="reel-modal">
+
+
+                <div class="modal-content">
+
+
+                    <h2>
+                        Nuevo Reel
+                    </h2>
+
+
+                    <form id="reel-form">
+
+
+                        <!-- TÍTULO -->
+
+                        <label>
+                            Título
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            required>
+
+
+                        <!-- DESCRIPCIÓN -->
+
+                        <label>
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="description"
+                            rows="5"
+                            required></textarea>
+
+
+                        <!-- PLATAFORMA -->
+
+                        <label>
+                            Plataforma
+                        </label>
+
+                        <select id="platform">
+
+                            <option value="Instagram">
+                                Instagram
+                            </option>
+
+                            <option value="TikTok">
+                                TikTok
+                            </option>
+
+                            <option value="YouTube">
+                                YouTube
+                            </option>
+
+                            <option value="Facebook">
+                                Facebook
+                            </option>
+
+                        </select>
+
+
+                        <!-- URL -->
+
+                        <label>
+                            Enlace del Reel
+                        </label>
+
+                        <input
+                            type="url"
+                            id="url"
+                            placeholder="https://..."
+                            required>
+
+
+                        <!-- PUBLICADO -->
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="published">
+
+                            Publicar inmediatamente
+
+                        </label>
+
+
+                        <!-- BOTONES -->
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-reel">
+
+                                Cancelar
+
+                            </button>
+
+
+                            <button
+                                class="btn"
+                                type="submit">
+
+                                Guardar Reel
+
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/reels/reels.ts">
+</script>
+
+</body>
+
+</html>
