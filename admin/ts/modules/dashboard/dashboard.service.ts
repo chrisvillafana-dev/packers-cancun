@@ -14,42 +14,81 @@ import type { DashboardStats } from "./dashboard.types";
 
 export async function getDashboardStats(): Promise<DashboardStats> {
 
-    const [
-        newsSnapshot,
-        matchesSnapshot,
-        reelsSnapshot,
-        gallerySnapshot
-    ] = await Promise.all([
+    try {
 
-        getDocs(
+        const newsSnapshot = await getDocs(
             collection(db, "news")
-        ),
+        );
 
-        getDocs(
+        const matchesSnapshot = await getDocs(
             collection(db, "matches")
-        ),
+        );
 
-        getDocs(
+        const reelsSnapshot = await getDocs(
             collection(db, "reels")
-        ),
+        );
 
-        getDocs(
+        const gallerySnapshot = await getDocs(
             collection(db, "gallery")
-        )
-
-    ]);
+        );
 
 
-    return {
+        console.log("Dashboard:");
 
-        news: newsSnapshot.size,
+        console.log(
+            "Noticias:",
+            newsSnapshot.size
+        );
 
-        matches: matchesSnapshot.size,
+        console.log(
+            "Partidos:",
+            matchesSnapshot.size
+        );
 
-        reels: reelsSnapshot.size,
+        console.log(
+            "Reels:",
+            reelsSnapshot.size
+        );
 
-        gallery: gallerySnapshot.size
+        console.log(
+            "Galería:",
+            gallerySnapshot.size
+        );
 
-    };
+
+        return {
+
+            news: newsSnapshot.size,
+
+            matches: matchesSnapshot.size,
+
+            reels: reelsSnapshot.size,
+
+            gallery: gallerySnapshot.size
+
+        };
+
+
+    } catch (error) {
+
+        console.error(
+            "Error obteniendo estadísticas del Dashboard:",
+            error
+        );
+
+
+        return {
+
+            news: 0,
+
+            matches: 0,
+
+            reels: 0,
+
+            gallery: 0
+
+        };
+
+    }
 
 }

@@ -1,221 +1,769 @@
-import { createNews, editNews, getNews, removeNews, togglePublished } from "./news.service";
+import {
+    createNews,
+    editNews,
+    getNews,
+    removeNews,
+    togglePublished
+} from "./news.service";
 
-const modal = document.querySelector("#news-modal") as HTMLDivElement;
+import { uploadImage } from "../../cloudinary";
 
-const form = document.querySelector("#news-form") as HTMLFormElement;
 
-const newsTable = document.querySelector("#news-table") as HTMLTableSectionElement;
+/* ==========================================
+   ELEMENTOS
+========================================== */
 
-const searchInput = document.querySelector("#search-news") as HTMLInputElement;
+const modal =
+    document.querySelector("#news-modal") as HTMLDivElement;
 
-const newButton = document.querySelector("#new-news-btn") as HTMLButtonElement;
+const form =
+    document.querySelector("#news-form") as HTMLFormElement;
 
-const cancelButton = document.querySelector("#cancel-news") as HTMLButtonElement;
+const newsTable =
+    document.querySelector("#news-table") as HTMLTableSectionElement;
 
-const title = document.querySelector("#title") as HTMLInputElement;
+const searchInput =
+    document.querySelector("#search-news") as HTMLInputElement;
 
-const description = document.querySelector("#description") as HTMLTextAreaElement;
+const newButton =
+    document.querySelector("#new-news-btn") as HTMLButtonElement;
 
-const category = document.querySelector("#category") as HTMLSelectElement;
+const cancelButton =
+    document.querySelector("#cancel-news") as HTMLButtonElement;
 
-const published = document.querySelector("#published") as HTMLInputElement;
+const title =
+    document.querySelector("#title") as HTMLInputElement;
 
-const saveButton = form.querySelector("button[type='submit']") as HTMLButtonElement;
+const description =
+    document.querySelector("#description") as HTMLTextAreaElement;
+
+const imageInput =
+    document.querySelector("#image") as HTMLInputElement;
+
+const category =
+    document.querySelector("#category") as HTMLSelectElement;
+
+const published =
+    document.querySelector("#published") as HTMLInputElement;
+
+const imagePreview =
+    document.querySelector("#image-preview") as HTMLDivElement;
+
+const imagePreviewImg =
+    document.querySelector("#image-preview-img") as HTMLImageElement;
+
+const saveButton =
+    form.querySelector(
+        "button[type='submit']"
+    ) as HTMLButtonElement;
+
+
+/* ==========================================
+   ESTADO
+========================================== */
 
 let editingId: string | null = null;
 
-newButton.addEventListener("click", () => {
+/*
+ * URL actual de la imagen.
+ *
+ * Puede ser:
+ * - La imagen existente de Cloudinary al editar.
+ * - La nueva imagen subida a Cloudinary.
+ * - Una cadena vacía si no existe imagen.
+ */
+let currentImageUrl = "";
 
-    editingId = null;
 
-    form.reset();
+/* ==========================================
+   LIMPIAR PREVIEW
+========================================== */
 
-    saveButton.textContent = "Guardar noticia";
+function clearImagePreview(): void {
 
-    modal.classList.remove("hidden");
+    currentImageUrl = "";
 
-});
+    imageInput.value = "";
 
-cancelButton.addEventListener("click", () => {
+    imagePreviewImg.src = "";
 
-    editingId = null;
+    imagePreview.classList.add("hidden");
 
-    form.reset();
+}
 
-    saveButton.textContent = "Guardar noticia";
 
-    modal.classList.add("hidden");
+/* ==========================================
+   MOSTRAR PREVIEW
+========================================== */
 
-});
+function showImagePreview(
+    url: string
+): void {
 
-form.addEventListener("submit", async (event) => {
+    if (!url) {
 
-    event.preventDefault();
+        clearImagePreview();
 
-    try {
+        return;
 
-        if (editingId) {
+    }
 
-            await editNews(editingId, {
+    imagePreviewImg.src = url;
 
-                title: title.value,
+    imagePreview.classList.remove(
+        "hidden"
+    );
 
-                description: description.value,
+}
 
-                category: category.value,
 
-                published: published.checked
+/* ==========================================
+   PREVIEW DE ARCHIVO LOCAL
+========================================== */
 
-            });
+imageInput.addEventListener(
+    "change",
+    () => {
 
-            alert("Noticia actualizada correctamente.");
+        const file =
+            imageInput.files?.[0];
 
-        } else {
-
-            await createNews({
-
-                title: title.value,
-
-                description: description.value,
-
-                category: category.value,
-
-                published: published.checked
-
-            });
-
-            alert("Noticia creada correctamente.");
-
+        if (!file) {
+            return;
         }
+
+
+        /*
+         * Esta URL SOLO se utiliza para
+         * mostrar la vista previa local.
+         *
+         * NO se guarda en Firestore.
+         */
+        const previewUrl =
+            URL.createObjectURL(file);
+
+
+        imagePreviewImg.src =
+            previewUrl;
+
+        imagePreview.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* ==========================================
+   NUEVA NOTICIA
+========================================== */
+
+newButton.addEventListener(
+    "click",
+    () => {
 
         editingId = null;
 
         form.reset();
 
-        modal.classList.add("hidden");
+        clearImagePreview();
 
-        saveButton.textContent = "Guardar noticia";
+        saveButton.textContent =
+            "Guardar noticia";
+
+        modal.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* ==========================================
+   CANCELAR
+========================================== */
+
+cancelButton.addEventListener(
+    "click",
+    () => {
+
+        editingId = null;
+
+        form.reset();
+
+        clearImagePreview();
+
+        saveButton.textContent =
+            "Guardar noticia";
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* ==========================================
+   GUARDAR / EDITAR
+========================================== */
+
+form.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        try {
+
+            saveButton.disabled = true;
+
+            saveButton.textContent =
+                "Guardando...";
+
+
+            /*
+             * =====================================
+             * IMAGEN
+             * =====================================
+             *
+             * Si el usuario seleccionó una nueva
+             * imagen, la subimos a Cloudinary.
+             *
+             * Si está editando y no seleccionó
+             * una nueva, conservamos la imagen
+             * existente.
+             */
+
+            let finalImageUrl =
+                currentImageUrl;
+
+
+            const selectedFile =
+                imageInput.files?.[0];
+
+
+            if (selectedFile) {
+
+                saveButton.textContent =
+                    "Subiendo imagen...";
+
+
+                finalImageUrl =
+                    await uploadImage(
+                        selectedFile
+                    );
+
+            }
+
+
+            /*
+             * =====================================
+             * DATOS DE LA NOTICIA
+             * =====================================
+             */
+
+            const newsData = {
+
+                title:
+                    title.value.trim(),
+
+                description:
+                    description.value.trim(),
+
+                category:
+                    category.value,
+
+                image:
+                    finalImageUrl,
+
+                published:
+                    published.checked
+
+            };
+
+
+            /*
+             * =====================================
+             * EDITAR
+             * =====================================
+             */
+
+            if (editingId) {
+
+                await editNews(
+                    editingId,
+                    newsData
+                );
+
+
+                alert(
+                    "Noticia actualizada correctamente."
+                );
+
+            }
+
+
+            /*
+             * =====================================
+             * CREAR
+             * =====================================
+             */
+
+            else {
+
+                await createNews(
+                    newsData
+                );
+
+
+                alert(
+                    "Noticia creada correctamente."
+                );
+
+            }
+
+
+            /*
+             * =====================================
+             * LIMPIAR
+             * =====================================
+             */
+
+            editingId = null;
+
+            form.reset();
+
+            clearImagePreview();
+
+            modal.classList.add(
+                "hidden"
+            );
+
+            saveButton.textContent =
+                "Guardar noticia";
+
+            saveButton.disabled =
+                false;
+
+
+            await loadNews();
+
+
+        } catch (error: any) {
+
+            console.error(
+                "Error en Noticias:",
+                error
+            );
+
+
+            alert(
+                `Error: ${
+                    error?.message ||
+                    "No se pudo guardar la noticia."
+                }`
+            );
+
+
+            saveButton.disabled =
+                false;
+
+            saveButton.textContent =
+                editingId
+                    ? "Actualizar noticia"
+                    : "Guardar noticia";
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   ELIMINAR
+========================================== */
+
+async function deleteNews(
+    id: string
+): Promise<void> {
+
+    const confirmed =
+        confirm(
+            "¿Eliminar esta noticia?"
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        await removeNews(id);
 
         await loadNews();
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Error eliminando noticia:",
+            error
+        );
 
-        alert("Ocurrió un error.");
+        alert(
+            "No se pudo eliminar la noticia."
+        );
 
     }
 
-});
-
-async function deleteNews(id: string) {
-
-    const confirmed = confirm("¿Eliminar esta noticia?");
-
-    if (!confirmed) return;
-
-    await removeNews(id);
-
-    await loadNews();
-
 }
 
-async function loadNews(search = "") {
+
+/* ==========================================
+   CARGAR NOTICIAS
+========================================== */
+
+async function loadNews(
+    search = ""
+): Promise<void> {
 
     newsTable.innerHTML = "";
 
-    const snapshot = await getNews();
 
-    snapshot.forEach((item) => {
+    try {
 
-        const news = item.data();
+        const snapshot =
+            await getNews();
 
-        if (
-            !news.title
-                .toLowerCase()
-                .includes(search.toLowerCase())
-        ) {
-            return;
-        }
 
-        const row = document.createElement("tr");
+        snapshot.forEach(
+            (item) => {
 
-        row.innerHTML = `
-            <td>${news.title}</td>
+                const news =
+                    item.data();
 
-            <td>${news.category}</td>
 
-            <td>
+                const newsTitle =
+                    news.title || "";
 
-                <input
-                    type="checkbox"
-                    class="publish-toggle"
-                    ${news.published ? "checked" : ""}>
 
-            </td>
+                const searchText =
+                    newsTitle.toLowerCase();
 
-            <td>
 
-                <button class="btn-edit">
-                    ✏️
-                </button>
+                if (
+                    !searchText.includes(
+                        search.toLowerCase()
+                    )
+                ) {
 
-                <button class="btn-delete">
-                    🗑️
-                </button>
+                    return;
 
-            </td>
-        `;
+                }
 
-        const editButton = row.querySelector(".btn-edit") as HTMLButtonElement;
 
-        const deleteButton = row.querySelector(".btn-delete") as HTMLButtonElement;
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
 
-        const toggle = row.querySelector(".publish-toggle") as HTMLInputElement;
 
-        editButton.addEventListener("click", () => {
+                /*
+                 * ==================================
+                 * FILA
+                 * ==================================
+                 */
 
-            editingId = item.id;
+                row.innerHTML = `
 
-            title.value = news.title;
+                    <td>
+                        ${escapeHTML(
+                            news.title || ""
+                        )}
+                    </td>
 
-            description.value = news.description;
+                    <td>
+                        ${escapeHTML(
+                            news.category || ""
+                        )}
+                    </td>
 
-            category.value = news.category;
+                    <td>
 
-            published.checked = news.published;
+                        <input
+                            type="checkbox"
+                            class="publish-toggle"
+                            ${
+                                news.published
+                                    ? "checked"
+                                    : ""
+                            }
+                        >
 
-            saveButton.textContent = "Actualizar noticia";
+                    </td>
 
-            modal.classList.remove("hidden");
+                    <td>
 
-        });
+                        <button
+                            class="btn-edit"
+                            type="button">
 
-        deleteButton.addEventListener("click", () => {
+                            ✏️
 
-            deleteNews(item.id);
+                        </button>
 
-        });
+                        <button
+                            class="btn-delete"
+                            type="button">
 
-        toggle.addEventListener("change", async () => {
+                            🗑️
 
-            await togglePublished(
-                item.id,
-                toggle.checked
-            );
+                        </button>
 
-        });
+                    </td>
 
-        newsTable.appendChild(row);
+                `;
 
-    });
+
+                /*
+                 * ==================================
+                 * BOTÓN EDITAR
+                 * ==================================
+                 */
+
+                const editButton =
+                    row.querySelector(
+                        ".btn-edit"
+                    ) as HTMLButtonElement;
+
+
+                editButton.addEventListener(
+                    "click",
+                    () => {
+
+                        editingId =
+                            item.id;
+
+
+                        title.value =
+                            news.title || "";
+
+
+                        description.value =
+                            news.description || "";
+
+
+                        category.value =
+                            news.category ||
+                            "General";
+
+
+                        published.checked =
+                            news.published === true;
+
+
+                        /*
+                         * IMPORTANTE:
+                         *
+                         * NO hacemos:
+                         *
+                         * imageInput.value =
+                         * news.image
+                         *
+                         * porque los navegadores
+                         * no permiten establecer
+                         * programáticamente un
+                         * input type="file".
+                         */
+
+
+                        imageInput.value =
+                            "";
+
+
+                        /*
+                         * Conservamos la URL
+                         * existente.
+                         */
+
+                        currentImageUrl =
+                            news.image || "";
+
+
+                        if (
+                            currentImageUrl
+                        ) {
+
+                            showImagePreview(
+                                currentImageUrl
+                            );
+
+                        } else {
+
+                            clearImagePreview();
+
+                        }
+
+
+                        saveButton.textContent =
+                            "Actualizar noticia";
+
+
+                        modal.classList.remove(
+                            "hidden"
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * ==================================
+                 * BOTÓN ELIMINAR
+                 * ==================================
+                 */
+
+                const deleteButton =
+                    row.querySelector(
+                        ".btn-delete"
+                    ) as HTMLButtonElement;
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    () => {
+
+                        deleteNews(
+                            item.id
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * ==================================
+                 * PUBLICAR / BORRADOR
+                 * ==================================
+                 */
+
+                const toggle =
+                    row.querySelector(
+                        ".publish-toggle"
+                    ) as HTMLInputElement;
+
+
+                toggle.addEventListener(
+                    "change",
+                    async () => {
+
+                        try {
+
+                            await togglePublished(
+                                item.id,
+                                toggle.checked
+                            );
+
+                        } catch (error) {
+
+                            console.error(
+                                "Error cambiando estado:",
+                                error
+                            );
+
+
+                            alert(
+                                "No se pudo cambiar el estado."
+                            );
+
+
+                            toggle.checked =
+                                !toggle.checked;
+
+                        }
+
+                    }
+                );
+
+
+                newsTable.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error cargando noticias:",
+            error
+        );
+
+        alert(
+            "No se pudieron cargar las noticias."
+        );
+
+    }
 
 }
 
-searchInput.addEventListener("input", () => {
 
-    loadNews(searchInput.value);
+/* ==========================================
+   ESCAPAR HTML
+========================================== */
 
-});
+function escapeHTML(
+    value: string
+): string {
+
+    return value
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   BUSCADOR
+========================================== */
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        loadNews(
+            searchInput.value
+        );
+
+    }
+);
+
+
+/* ==========================================
+   INICIAR
+========================================== */
 
 loadNews();

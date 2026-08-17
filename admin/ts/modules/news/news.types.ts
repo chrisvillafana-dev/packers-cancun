@@ -8,6 +8,8 @@ export interface News {
 
     category: string;
 
+    image: string;
+
     published: boolean;
 
     createdAt?: any;

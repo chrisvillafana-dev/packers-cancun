@@ -155,6 +155,21 @@ placeholder="Buscar noticia...">
                             id="description"
                             rows="5"
                             required></textarea>
+
+                            <label>Imagen de la noticia</label>
+
+<input
+    type="file"
+    id="image"
+    accept="image/jpeg,image/png,image/webp">
+
+<small class="form-note">
+    JPG, PNG o WebP. Máximo recomendado: 10 MB.
+</small>
+
+<div id="image-preview" class="image-preview hidden">
+    <img id="image-preview-img" src="" alt="Vista previa">
+</div>
             
                         <label>Categoría</label>
             
