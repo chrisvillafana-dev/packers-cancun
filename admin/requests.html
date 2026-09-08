@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Solicitudes | Packers CMS
+    </title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún"
+            >
+
+            <div>
+
+                <h2>
+                    Packers CMS
+                </h2>
+
+                <span>
+                    Administración
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./reels.html">
+                        Reels
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./gallery.html">
+                        Galería
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./players.html">
+                        Estadísticas
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./categories.html">
+                        Categorías
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a
+                        href="./requests.html"
+                        class="active"
+                    >
+                        Solicitudes
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./users.html">
+                        Usuarios
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="./settings.html">
+                        Configuración
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="admin-content">
+
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    Solicitudes
+                </h1>
+
+                <p>
+                    Gestiona las personas interesadas
+                    en unirse a Packers Cancún.
+                </p>
+
+            </div>
+
+
+            <button
+                class="btn"
+                id="logout-btn"
+                type="button"
+            >
+                Cerrar sesión
+            </button>
+
+        </header>
+
+
+
+        <section class="dashboard-home">
+
+
+            <!-- ======================================
+                 RESUMEN
+            ======================================= -->
+
+            <div
+                style="
+                    display:grid;
+                    grid-template-columns:
+                        repeat(
+                            auto-fit,
+                            minmax(180px,1fr)
+                        );
+                    gap:1rem;
+                    margin-bottom:1.5rem;
+                "
+            >
+
+
+                <div
+                    style="
+                        padding:1.2rem;
+                        border-radius:14px;
+                        background:#fff;
+                        border:1px solid rgba(0,0,0,.08);
+                    "
+                >
+
+                    <span
+                        style="
+                            display:block;
+                            font-size:.75rem;
+                            opacity:.6;
+                            margin-bottom:.35rem;
+                        "
+                    >
+                        TOTAL
+                    </span>
+
+                    <strong
+                        id="requests-total"
+                        style="
+                            font-size:1.8rem;
+                        "
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div
+                    style="
+                        padding:1.2rem;
+                        border-radius:14px;
+                        background:#fff;
+                        border:1px solid rgba(0,0,0,.08);
+                    "
+                >
+
+                    <span
+                        style="
+                            display:block;
+                            font-size:.75rem;
+                            opacity:.6;
+                            margin-bottom:.35rem;
+                        "
+                    >
+                        NUEVAS
+                    </span>
+
+                    <strong
+                        id="requests-new"
+                        style="
+                            font-size:1.8rem;
+                            color:#b78d12;
+                        "
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div
+                    style="
+                        padding:1.2rem;
+                        border-radius:14px;
+                        background:#fff;
+                        border:1px solid rgba(0,0,0,.08);
+                    "
+                >
+
+                    <span
+                        style="
+                            display:block;
+                            font-size:.75rem;
+                            opacity:.6;
+                            margin-bottom:.35rem;
+                        "
+                    >
+                        CONTACTADOS
+                    </span>
+
+                    <strong
+                        id="requests-contacted"
+                        style="
+                            font-size:1.8rem;
+                            color:#1f6f46;
+                        "
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <div
+                    style="
+                        padding:1.2rem;
+                        border-radius:14px;
+                        background:#fff;
+                        border:1px solid rgba(0,0,0,.08);
+                    "
+                >
+
+                    <span
+                        style="
+                            display:block;
+                            font-size:.75rem;
+                            opacity:.6;
+                            margin-bottom:.35rem;
+                        "
+                    >
+                        CERRADAS
+                    </span>
+
+                    <strong
+                        id="requests-closed"
+                        style="
+                            font-size:1.8rem;
+                            color:#666;
+                        "
+                    >
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ======================================
+                 FILTROS
+            ======================================= -->
+
+            <div
+                style="
+                    display:flex;
+                    flex-wrap:wrap;
+                    gap:1rem;
+                    align-items:center;
+                    margin-bottom:1.5rem;
+                "
+            >
+
+
+                <input
+                    type="search"
+                    id="search-request"
+                    placeholder="Buscar nombre, teléfono o categoría..."
+                    style="
+                        min-width:280px;
+                        padding:.75rem 1rem;
+                    "
+                >
+
+
+                <select
+                    id="filter-request-status"
+                    style="
+                        padding:.75rem 1rem;
+                    "
+                >
+
+                    <option value="">
+                        Todos los estados
+                    </option>
+
+                    <option value="new">
+                        Nuevas
+                    </option>
+
+                    <option value="contacted">
+                        Contactados
+                    </option>
+
+                    <option value="closed">
+                        Cerradas
+                    </option>
+
+                </select>
+
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    id="refresh-requests"
+                >
+                    Actualizar
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ======================================
+                 TABLA
+            ======================================= -->
+
+            <div
+                style="
+                    overflow-x:auto;
+                    background:#fff;
+                    border-radius:14px;
+                    border:1px solid rgba(0,0,0,.08);
+                "
+            >
+
+                <table
+                    style="
+                        width:100%;
+                    "
+                >
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Nombre
+                            </th>
+
+                            <th>
+                                Edad
+                            </th>
+
+                            <th>
+                                Categoría
+                            </th>
+
+                            <th>
+                                Teléfono
+                            </th>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="requests-table">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                style="
+                                    text-align:center;
+                                    padding:2rem;
+                                "
+                            >
+                                Cargando solicitudes...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+
+            <!-- ======================================
+                 MODAL DETALLE
+            ======================================= -->
+
+            <div
+                class="modal hidden"
+                id="request-modal"
+            >
+
+
+                <div
+                    class="modal-content"
+                    style="
+                        max-width:650px;
+                    "
+                >
+
+
+                    <div
+                        style="
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:flex-start;
+                            gap:1rem;
+                            margin-bottom:1rem;
+                        "
+                    >
+
+                        <div>
+
+                            <span
+                                style="
+                                    display:block;
+                                    font-size:.7rem;
+                                    opacity:.55;
+                                    margin-bottom:.25rem;
+                                "
+                            >
+                                SOLICITUD
+                            </span>
+
+                            <h2
+                                id="request-modal-name"
+                                style="
+                                    margin:0;
+                                "
+                            >
+                                Detalle
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="close-request-modal"
+                            style="
+                                border:0;
+                                background:transparent;
+                                cursor:pointer;
+                                font-size:1.5rem;
+                            "
+                            aria-label="Cerrar"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <div
+                        style="
+                            display:grid;
+                            grid-template-columns:
+                                repeat(
+                                    auto-fit,
+                                    minmax(180px,1fr)
+                                );
+                            gap:1rem;
+                            margin-bottom:1.2rem;
+                        "
+                    >
+
+
+                        <div>
+
+                            <span
+                                style="
+                                    display:block;
+                                    opacity:.55;
+                                    font-size:.72rem;
+                                    margin-bottom:.2rem;
+                                "
+                            >
+                                EDAD
+                            </span>
+
+                            <strong id="request-modal-age">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div>
+
+                            <span
+                                style="
+                                    display:block;
+                                    opacity:.55;
+                                    font-size:.72rem;
+                                    margin-bottom:.2rem;
+                                "
+                            >
+                                CATEGORÍA
+                            </span>
+
+                            <strong id="request-modal-category">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div>
+
+                            <span
+                                style="
+                                    display:block;
+                                    opacity:.55;
+                                    font-size:.72rem;
+                                    margin-bottom:.2rem;
+                                "
+                            >
+                                FECHA
+                            </span>
+
+                            <strong id="request-modal-date">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div
+                        style="
+                            margin-bottom:1.2rem;
+                        "
+                    >
+
+                        <span
+                            style="
+                                display:block;
+                                opacity:.55;
+                                font-size:.72rem;
+                                margin-bottom:.3rem;
+                            "
+                        >
+                            WHATSAPP / TELÉFONO
+                        </span>
+
+                        <a
+                            href="#"
+                            id="request-modal-phone"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="
+                                font-weight:700;
+                            "
+                        >
+                            -
+                        </a>
+
+                    </div>
+
+
+
+                    <div
+                        style="
+                            margin-bottom:1.4rem;
+                        "
+                    >
+
+                        <span
+                            style="
+                                display:block;
+                                opacity:.55;
+                                font-size:.72rem;
+                                margin-bottom:.4rem;
+                            "
+                        >
+                            EXPERIENCIA
+                        </span>
+
+                        <p
+                            id="request-modal-experience"
+                            style="
+                                margin:0;
+                                line-height:1.65;
+                                white-space:pre-wrap;
+                            "
+                        >
+                            -
+                        </p>
+
+                    </div>
+
+
+
+                    <div
+                        style="
+                            margin-bottom:1.5rem;
+                        "
+                    >
+
+                        <label for="request-modal-status">
+                            Estado
+                        </label>
+
+                        <select
+                            id="request-modal-status"
+                        >
+
+                            <option value="new">
+                                Nueva
+                            </option>
+
+                            <option value="contacted">
+                                Contactado
+                            </option>
+
+                            <option value="closed">
+                                Cerrado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="modal-actions">
+
+
+                        <button
+                            type="button"
+                            class="btn btn-outline"
+                            id="delete-request"
+                        >
+                            Eliminar
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn"
+                            id="save-request-status"
+                        >
+                            Guardar estado
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/requests/requests.ts"
+></script>
+
+</body>
+
+</html>
