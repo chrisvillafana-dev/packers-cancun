@@ -400,8 +400,9 @@ section {
     justify-content: center;
     align-items: flex-start;
     padding: 2rem 2.4rem;
-    background: rgba(9, 19, 13, 0.98);
+    background: var(--green-900);
     border-left: 1px solid rgba(201, 162, 39, 0.2);
+    box-shadow: -12px 0 30px rgba(0, 0, 0, 0.35);
     transform: translateX(100%);
     transition: transform var(--dur-med) var(--ease-smooth);
   }
@@ -1316,6 +1317,879 @@ table.stats-table {
 
   .public-reel-content p {
     display: none;
+  }
+
+}
+
+/* ==========================================
+   GALERÍA
+========================================== */
+
+.gallery-section {
+  padding: 4rem 0 6rem;
+}
+
+.gallery-toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.gallery-filter {
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  background: var(--green-900);
+  color: var(--bone-200);
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  font-family: var(--font-data);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:
+    background var(--dur-med) var(--ease-smooth),
+    color var(--dur-med) var(--ease-smooth),
+    border-color var(--dur-med) var(--ease-smooth),
+    transform var(--dur-med) var(--ease-smooth);
+}
+
+.gallery-filter:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 162, 39, 0.55);
+}
+
+.gallery-filter.active {
+  background: var(--gold-500);
+  color: var(--ink-900);
+  border-color: var(--gold-500);
+}
+
+
+/* ==========================================
+   GRID
+========================================== */
+
+.gallery-grid {
+  columns: 3 280px;
+  column-gap: 1.2rem;
+}
+
+.gallery-card {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--green-900);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  cursor: pointer;
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.7);
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    transform 0.5s var(--ease-smooth),
+    filter 0.5s var(--ease-smooth);
+}
+
+.gallery-card:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.72);
+}
+
+.gallery-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.gallery-card:hover .gallery-card-overlay {
+  opacity: 1;
+}
+
+.gallery-card-category {
+  align-self: flex-start;
+  margin-bottom: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: var(--gold-500);
+  color: var(--ink-900);
+  font-family: var(--font-data);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.gallery-card-title {
+  color: var(--bone-100);
+  font-family: var(--font-ceremonial);
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+
+/* ==========================================
+   LIGHTBOX
+========================================== */
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(3, 10, 7, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.gallery-lightbox.hidden {
+  display: none;
+}
+
+.gallery-lightbox-content {
+  width: min(1100px, 90vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-lightbox-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.65);
+}
+
+.gallery-lightbox-info {
+  width: min(800px, 90vw);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.gallery-lightbox-category {
+  color: var(--gold-500);
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gallery-lightbox-info h2 {
+  margin: 0.35rem 0;
+  color: var(--bone-100);
+  font-family: var(--font-ceremonial);
+}
+
+.gallery-lightbox-info p {
+  margin: 0;
+  color: var(--bone-200);
+  opacity: 0.85;
+}
+
+.gallery-lightbox-close,
+.gallery-lightbox-prev,
+.gallery-lightbox-next {
+  position: fixed;
+  border: 0;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--bone-100);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.gallery-lightbox-close {
+  top: 1.2rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 2rem;
+}
+
+.gallery-lightbox-prev,
+.gallery-lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 64px;
+  border-radius: 10px;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.gallery-lightbox-prev {
+  left: 1rem;
+}
+
+.gallery-lightbox-next {
+  right: 1rem;
+}
+
+.gallery-lightbox-close:hover,
+.gallery-lightbox-prev:hover,
+.gallery-lightbox-next:hover {
+  background: rgba(201, 162, 39, 0.85);
+  color: var(--ink-900);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 700px) {
+
+  .gallery-section {
+    padding-top: 2.5rem;
+  }
+
+  .gallery-grid {
+    columns: 2 150px;
+    column-gap: 0.7rem;
+  }
+
+  .gallery-card {
+    margin-bottom: 0.7rem;
+  }
+
+  .gallery-card-overlay {
+    opacity: 1;
+    padding: 0.75rem;
+  }
+
+  .gallery-card-title {
+    font-size: 0.95rem;
+  }
+
+  .gallery-lightbox {
+    padding: 1rem;
+  }
+
+  .gallery-lightbox-content img {
+    max-height: 65vh;
+  }
+
+  .gallery-lightbox-prev,
+  .gallery-lightbox-next {
+    width: 40px;
+    height: 50px;
+    font-size: 2.2rem;
+  }
+
+}
+
+/* =========================================================
+   REELS — MODAL PÚBLICO
+========================================================= */
+
+.reel-modal-public {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.reel-modal-public.hidden {
+  display: none;
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+.reel-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 8, 5, 0.88);
+  backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.reel-modal-dialog {
+  position: relative;
+  z-index: 2;
+
+  width: min(960px, 100%);
+  max-height: 92vh;
+
+  overflow: auto;
+
+  background: var(--green-900);
+
+  border: 1px solid rgba(201, 162, 39, 0.3);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7);
+
+  animation:
+    reelModalIn 0.22s ease-out;
+}
+
+
+/* =========================================================
+   ANIMACIÓN
+========================================================= */
+
+@keyframes reelModalIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR
+========================================================= */
+
+.reel-modal-close {
+  position: absolute;
+
+  top: 0.8rem;
+  right: 0.8rem;
+
+  z-index: 10;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+
+  background: rgba(0,0,0,0.55);
+
+  color: var(--bone-100);
+
+  font-size: 1.7rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background var(--dur-fast) var(--ease-smooth),
+    transform var(--dur-fast) var(--ease-smooth);
+}
+
+.reel-modal-close:hover {
+  background: rgba(0,0,0,0.8);
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   ÁREA MULTIMEDIA
+========================================================= */
+
+.reel-modal-media {
+  width: 100%;
+  min-height: 420px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #050907;
+}
+
+
+/* =========================================================
+   VIDEO / YOUTUBE
+========================================================= */
+
+.reel-modal-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.reel-modal-video iframe {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border: 0;
+}
+
+
+/* =========================================================
+   CONTENIDO EXTERNO
+========================================================= */
+
+.reel-modal-external {
+  width: 100%;
+  min-height: 420px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 3rem;
+
+  text-align: center;
+}
+
+.reel-modal-platform-icon {
+  width: 82px;
+  height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 1.2rem;
+
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 50%;
+
+  color: var(--gold-300);
+
+  font-size: 2.5rem;
+}
+
+.reel-modal-external h3 {
+  margin-bottom: 0.6rem;
+
+  color: var(--bone-100);
+
+  font-family: var(--font-ceremonial);
+}
+
+.reel-modal-external p {
+  max-width: 42ch;
+  margin-bottom: 1.5rem;
+
+  color: var(--bone-200);
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.reel-modal-info {
+  padding: 1.5rem 1.7rem 1.8rem;
+}
+
+.reel-modal-platform {
+  display: inline-block;
+
+  margin-bottom: 0.45rem;
+
+  color: var(--jade-300);
+
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reel-modal-info h2 {
+  margin-bottom: 0.5rem;
+
+  color: var(--bone-100);
+
+  font-family: var(--font-ceremonial);
+  font-size: 1.5rem;
+}
+
+.reel-modal-info p {
+  color: var(--bone-200);
+  opacity: 0.82;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   TARJETA — BOTÓN PREVIEW
+========================================================= */
+
+.public-reel-preview {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.public-reel-preview img {
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 9 / 12;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .reel-modal-public {
+    padding: 0;
+  }
+
+  .reel-modal-dialog {
+    width: 100%;
+    max-height: 100vh;
+
+    border-radius: 0;
+
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .reel-modal-media {
+    min-height: 55vh;
+  }
+
+  .reel-modal-external {
+    min-height: 55vh;
+    padding: 2rem;
+  }
+
+  .reel-modal-info {
+    padding: 1.2rem 1.3rem 1.5rem;
+  }
+
+  .reel-modal-close {
+    top: 0.6rem;
+    right: 0.6rem;
+  }
+
+}
+
+/* ==========================================
+   REEL PLAYER MODAL
+========================================== */
+
+.reel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.2rem;
+
+  background: rgba(4, 10, 7, 0.92);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+
+.reel-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.reel-modal-backdrop {
+  position: absolute;
+  inset: 0;
+
+  cursor: pointer;
+}
+
+
+.reel-modal-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(960px, 100%);
+
+  max-height: 92vh;
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      165deg,
+      var(--green-800),
+      var(--green-900)
+    );
+
+  border: 1px solid
+    rgba(201, 162, 39, 0.35);
+
+  border-radius: var(--radius-md);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55);
+
+  transform: translateY(20px) scale(0.98);
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.reel-modal.is-open
+.reel-modal-content {
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+.reel-modal-close {
+  position: absolute;
+
+  top: 0.8rem;
+  right: 0.8rem;
+
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 50%;
+
+  background:
+    rgba(5, 12, 8, 0.85);
+
+  color: var(--bone-100);
+
+  font-size: 1.8rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.reel-modal-close:hover {
+  background: var(--gold-500);
+  color: var(--ink-900);
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+.reel-modal-player {
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  background: #000;
+
+  overflow: hidden;
+}
+
+
+.reel-modal-player iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+}
+
+
+.reel-platform-message {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 2rem;
+
+  color: var(--bone-100);
+}
+
+
+.reel-platform-message span {
+  font-size: 3rem;
+
+  color: var(--gold-400);
+}
+
+
+.reel-platform-message h3 {
+  margin: 0.8rem 0 0.4rem;
+
+  font-family: var(--font-ceremonial);
+}
+
+
+.reel-platform-message p {
+  margin: 0;
+
+  color: var(--bone-200);
+
+  opacity: 0.8;
+}
+
+
+/* ==========================================
+   INFO
+========================================== */
+
+.reel-modal-info {
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+
+.reel-modal-platform {
+  display: inline-block;
+
+  margin-bottom: 0.45rem;
+
+  font-family: var(--font-data);
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: var(--jade-300);
+}
+
+
+.reel-modal-info h2 {
+  margin: 0;
+
+  color: var(--bone-100);
+
+  font-family: var(--font-ceremonial);
+
+  font-size: 1.5rem;
+}
+
+
+.reel-modal-info p {
+  margin:
+    0.55rem 0 1.1rem;
+
+  color: var(--bone-200);
+
+  opacity: 0.85;
+}
+
+
+.reel-modal-info .btn {
+  display: inline-flex;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+  .reel-modal {
+    padding: 0;
+  }
+
+  .reel-modal-content {
+
+    width: 100%;
+    max-height: 100vh;
+
+    border-radius: 0;
+
+  }
+
+  .reel-modal-player {
+    aspect-ratio: 9 / 16;
+  }
+
+  .reel-modal-info {
+    padding: 1.2rem;
+  }
+
+  .reel-modal-info h2 {
+    font-size: 1.25rem;
   }
 
 }

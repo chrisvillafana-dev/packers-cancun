@@ -23,6 +23,7 @@
           <li><a href="/index.html">Inicio</a></li>
           <li><a href="/partidos.html">Partidos</a></li>
           <li><a href="/reels.html">Reels</a></li>
+          <li><a href="/gallery.html">Galería</a></li>
           <li><a href="/categorias.html">Categorías</a></li>
           <li><a href="/stats.html">Stats</a></li>
           <li><a href="/unete.html">Únete a Nosotros</a></li>
@@ -54,6 +55,66 @@
     </div>
   </section>
 
+  <!-- ==========================================
+     MODAL REPRODUCTOR DE REELS
+========================================== -->
+
+<div
+class="reel-modal"
+data-reel-modal
+aria-hidden="true"
+>
+<div class="reel-modal-backdrop" data-reel-close></div>
+
+<div
+  class="reel-modal-content"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="reel-modal-title"
+>
+
+  <button
+    type="button"
+    class="reel-modal-close"
+    data-reel-close
+    aria-label="Cerrar reproductor"
+  >
+    ×
+  </button>
+
+  <div class="reel-modal-player" data-reel-player>
+    <!-- El reproductor se insertará aquí -->
+  </div>
+
+  <div class="reel-modal-info">
+
+    <span
+      class="reel-modal-platform"
+      data-reel-modal-platform
+    ></span>
+
+    <h2
+      id="reel-modal-title"
+      data-reel-modal-title
+    ></h2>
+
+    <p data-reel-modal-description></p>
+
+    <a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn"
+      data-reel-external
+    >
+      Abrir en la plataforma
+    </a>
+
+  </div>
+
+</div>
+</div>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -69,6 +130,7 @@
           <ul>
             <li><a href="/partidos.html">Partidos</a></li>
             <li><a href="/reels.html">Reels</a></li>
+            <li><a href="/gallery.html">Galería</a></li>
             <li><a href="/categorias.html">Categorías</a></li>
             <li><a href="/stats.html">Stats</a></li>
           </ul>

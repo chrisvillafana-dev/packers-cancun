@@ -6,6 +6,8 @@ import {
     togglePublished
 } from "./gallery.service";
 
+import { uploadImage } from "../../cloudinary";
+
 
 /* ==========================================
    ELEMENTOS
@@ -35,8 +37,16 @@ const title =
 const description =
     document.querySelector("#description") as HTMLTextAreaElement;
 
-const imageUrl =
-    document.querySelector("#image-url") as HTMLInputElement;
+    const imageInput =
+    document.querySelector("#image") as HTMLInputElement;
+
+const imagePreview =
+    document.querySelector("#image-preview") as HTMLDivElement;
+
+const imagePreviewImg =
+    document.querySelector("#image-preview-img") as HTMLImageElement;
+
+let imageUrl = "";
 
 const category =
     document.querySelector("#category") as HTMLSelectElement;
@@ -52,6 +62,34 @@ const saveButton =
 
 let editingId: string | null = null;
 
+function clearImagePreview() {
+
+    imageUrl = "";
+
+    imageInput.value = "";
+
+    imagePreviewImg.src = "";
+
+    imagePreview.classList.add("hidden");
+
+}
+
+imageInput.addEventListener("change", () => {
+
+    const file = imageInput.files?.[0];
+
+    if (!file) {
+        clearImagePreview();
+        return;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+
+    imagePreviewImg.src = previewUrl;
+
+    imagePreview.classList.remove("hidden");
+
+});
 
 /* ==========================================
    NUEVA IMAGEN
@@ -62,6 +100,8 @@ newButton.addEventListener("click", () => {
     editingId = null;
 
     form.reset();
+
+    clearImagePreview();
 
     saveButton.textContent =
         "Guardar imagen";
@@ -80,6 +120,8 @@ cancelButton.addEventListener("click", () => {
     editingId = null;
 
     form.reset();
+
+    clearImagePreview();
 
     saveButton.textContent =
         "Guardar imagen";
@@ -101,13 +143,51 @@ form.addEventListener(
 
         try {
 
+            const file = imageInput.files?.[0];
+
+            /*
+             * ==========================================
+             * SUBIR IMAGEN NUEVA
+             * ==========================================
+             */
+
+            if (file) {
+
+                imageUrl = await uploadImage(file);
+
+            }
+
+
+            /*
+             * ==========================================
+             * VALIDAR IMAGEN
+             * ==========================================
+             */
+
+            if (!imageUrl) {
+
+                alert(
+                    "Selecciona una imagen antes de continuar."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * ==========================================
+             * DATOS
+             * ==========================================
+             */
+
             const galleryData = {
 
                 title: title.value,
 
                 description: description.value,
 
-                imageUrl: imageUrl.value,
+                imageUrl: imageUrl,
 
                 category: category.value,
 
@@ -115,6 +195,12 @@ form.addEventListener(
 
             };
 
+
+            /*
+             * ==========================================
+             * CREAR / EDITAR
+             * ==========================================
+             */
 
             if (editingId) {
 
@@ -140,9 +226,17 @@ form.addEventListener(
             }
 
 
+            /*
+             * ==========================================
+             * LIMPIAR
+             * ==========================================
+             */
+
             editingId = null;
 
             form.reset();
+
+            clearImagePreview();
 
             modal.classList.add("hidden");
 
@@ -151,12 +245,15 @@ form.addEventListener(
 
             await loadGallery();
 
-        } catch (error) {
+        } catch (error: any) {
 
-            console.error(error);
+            console.error(
+                "Error en Galería:",
+                error
+            );
 
             alert(
-                "Ocurrió un error al guardar la imagen."
+                `Error: ${error.message}`
             );
 
         }

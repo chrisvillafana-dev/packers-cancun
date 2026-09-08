@@ -1,110 +1,883 @@
 <!doctype html>
+
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stats — Packers Cancún</title>
-  <meta name="description" content="Estadísticas de jugadores y equipo de Packers Cancún." />
-  <link rel="icon" type="image/png" href="/assets/favicon-256.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="/src/styles/style.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Stats — Packers Cancún
+  </title>
+
+  <meta
+    name="description"
+    content="Roster, perfiles y estadísticas de los jugadores de Packers Cancún."
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/assets/favicon-256.png"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/src/styles/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/src/styles/stats.css"
+  >
+
 </head>
+
+
 <body>
 
-  <header class="site-nav" data-site-nav>
+
+  <!-- =====================================================
+       NAV
+  ====================================================== -->
+
+  <header
+    class="site-nav"
+    data-site-nav
+  >
+
     <div class="container nav-inner">
-      <a href="/index.html" class="brand">
-        <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
-        <span>Packers Cancún</span>
+
+
+      <a
+        href="/index.html"
+        class="brand"
+      >
+
+        <img
+          src="/assets/logo-nav.png"
+          alt="Packers Cancún"
+        >
+
+        <span>
+          Packers Cancún
+        </span>
+
       </a>
+
+
       <nav aria-label="Navegación principal">
-        <ul class="nav-links" data-nav-links>
-          <li><a href="/index.html">Inicio</a></li>
-          <li><a href="/partidos.html">Partidos</a></li>
-          <li><a href="/reels.html">Reels</a></li>
-          <li><a href="/categorias.html">Categorías</a></li>
-          <li><a href="/stats.html">Stats</a></li>
-          <li><a href="/unete.html">Únete a Nosotros</a></li>
+
+        <ul
+          class="nav-links"
+          data-nav-links
+        >
+
+          <li>
+            <a href="/index.html">
+              Inicio
+            </a>
+          </li>
+
+          <li>
+            <a href="/partidos.html">
+              Partidos
+            </a>
+          </li>
+
+          <li>
+            <a href="/reels.html">
+              Reels
+            </a>
+          </li>
+
+          <li>
+            <a href="/gallery.html">
+              Galería
+            </a>
+          </li>
+
+          <li>
+            <a href="/categorias.html">
+              Categorías
+            </a>
+          </li>
+
+          <li>
+            <a href="/stats.html">
+              Stats
+            </a>
+          </li>
+
+          <li>
+            <a href="/unete.html">
+              Únete a Nosotros
+            </a>
+          </li>
+
         </ul>
+
       </nav>
-      <a href="/unete.html" class="btn nav-cta">Únete</a>
-      <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
+
+
+      <a
+        href="/unete.html"
+        class="btn nav-cta"
+      >
+        Únete
+      </a>
+
+
+      <button
+        class="nav-toggle"
+        data-nav-toggle
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
       </button>
+
+
     </div>
+
   </header>
 
-  <section class="page-header">
-    <div class="container">
-      <span class="eyebrow">Números</span>
-      <h1 class="section-title">Estadísticas</h1>
-      <p>Touchdowns, intercepciones y partidos jugados por categoría. Se llena conforme avanza la temporada.</p>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="stats-hero">
+
+    <div class="container stats-hero-inner">
+
+
+      <div class="stats-hero-copy">
+
+        <span class="stats-kicker">
+          PACKERS CANCÚN
+        </span>
+
+
+        <h1>
+
+          Player
+
+          <span>
+            Stats
+          </span>
+
+        </h1>
+
+
+        <p>
+
+          Conoce nuestro roster,
+          descubre a los jugadores destacados
+          y sigue su rendimiento durante
+          la temporada.
+
+        </p>
+
+      </div>
+
+
+      <div
+        class="stats-hero-mark"
+        aria-hidden="true"
+      >
+
+        <span class="stats-hero-number">
+          01
+        </span>
+
+        <span class="stats-hero-label">
+          ROSTER
+        </span>
+
+      </div>
+
+
     </div>
+
   </section>
 
-  <section>
-    <div class="container">
-      <div class="stats-table-wrap reveal">
-        <table class="stats-table">
-          <thead>
-            <tr>
-              <th>Jugador</th>
-              <th>Categoría</th>
-              <th>Touchdowns</th>
-              <th>Intercepciones</th>
-              <th>Partidos jugados</th>
-            </tr>
-          </thead>
-          <tbody data-stats-body>
-            <tr><td colspan="5">Cargando estadísticas…</td></tr>
-          </tbody>
-        </table>
-      </div>
+
+
+  <!-- =====================================================
+       ÁREA STATS
+  ====================================================== -->
+
+  <main class="stats-section">
+
+
+    <div class="stats-stadium-bg"></div>
+
+
+    <div class="container stats-container">
+
+
+      <!-- =================================================
+           MVP
+      ================================================== -->
+
+      <section
+        class="weekly-mvp hidden"
+        data-mvp-section
+        aria-label="MVP de la semana"
+      >
+
+        <div class="mvp-heading">
+
+          <div>
+
+            <span class="mvp-eyebrow">
+              PLAYER OF THE WEEK
+            </span>
+
+            <h2>
+              MVP de la Semana
+            </h2>
+
+          </div>
+
+
+          <span class="mvp-week-mark">
+            MVP
+          </span>
+
+        </div>
+
+
+        <article
+          class="mvp-card"
+          data-mvp-card
+        >
+
+
+          <div class="mvp-photo-wrap">
+
+            <img
+              src="/assets/logo-nav.png"
+              alt=""
+              class="mvp-photo"
+              data-mvp-photo
+            >
+
+            <div class="mvp-photo-shade"></div>
+
+
+            <span
+              class="mvp-category"
+              data-mvp-category
+            ></span>
+
+
+            <span
+              class="mvp-number"
+              data-mvp-number
+            ></span>
+
+          </div>
+
+
+          <div class="mvp-content">
+
+
+            <span class="mvp-team">
+              PACKERS CANCÚN
+            </span>
+
+
+            <h3 data-mvp-name>
+              Jugador
+            </h3>
+
+
+            <p
+              class="mvp-position"
+              data-mvp-position
+            ></p>
+
+
+            <p
+              class="mvp-achievement hidden"
+              data-mvp-achievement
+            ></p>
+
+
+            <div
+              class="mvp-stats"
+              data-mvp-stats
+            ></div>
+
+
+            <button
+              type="button"
+              class="mvp-profile-button"
+              data-mvp-open
+            >
+
+              Ver perfil completo
+
+              <span aria-hidden="true">
+                →
+              </span>
+
+            </button>
+
+
+          </div>
+
+
+          <div
+            class="mvp-watermark"
+            aria-hidden="true"
+          >
+            MVP
+          </div>
+
+
+        </article>
+
+      </section>
+
+
+
+      <!-- =================================================
+           ROSTER
+      ================================================== -->
+
+      <section class="stats-roster">
+
+
+        <div class="stats-section-heading">
+
+          <div>
+
+            <span class="stats-section-eyebrow">
+              ROSTER 2026
+            </span>
+
+            <h2>
+              Nuestros jugadores
+            </h2>
+
+          </div>
+
+
+          <p>
+
+            Selecciona una categoría o busca
+            a un jugador para conocer su
+            perfil completo.
+
+          </p>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             FILTROS DINÁMICOS
+        ================================================ -->
+
+        <div
+          class="stats-filters"
+          data-stats-filters
+        >
+
+          <button
+            type="button"
+            class="stats-filter active"
+            data-category="all"
+          >
+            Todos
+          </button>
+
+        </div>
+
+
+
+        <!-- ===============================================
+             TOOLBAR
+        ================================================ -->
+
+        <div class="stats-toolbar">
+
+
+          <label
+            class="stats-search"
+            for="stats-search"
+          >
+
+            <span
+              class="stats-search-icon"
+              aria-hidden="true"
+            >
+              ⌕
+            </span>
+
+
+            <input
+              type="search"
+              id="stats-search"
+              placeholder="Buscar jugador, posición o número..."
+              autocomplete="off"
+            >
+
+          </label>
+
+
+
+          <div class="stats-count">
+
+            <strong data-stats-count>
+              0
+            </strong>
+
+            <span>
+              jugadores
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ===============================================
+             PLAYERS
+        ================================================ -->
+
+        <div
+          class="players-grid"
+          data-stats-body
+          aria-live="polite"
+        >
+
+          <div class="stats-loading">
+
+            <div class="stats-spinner"></div>
+
+            <span>
+              Cargando roster...
+            </span>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
     </div>
-  </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       MODAL
+  ====================================================== -->
+
+  <div
+    class="player-modal hidden"
+    data-player-modal
+    aria-hidden="true"
+  >
+
+
+    <div
+      class="player-modal-backdrop"
+      data-player-close
+    ></div>
+
+
+
+    <div
+      class="player-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="player-modal-name"
+    >
+
+
+      <button
+        type="button"
+        class="player-modal-close"
+        data-player-close
+        aria-label="Cerrar perfil"
+      >
+        ×
+      </button>
+
+
+
+      <!-- ===============================================
+           FOTO COMPLETA
+      ================================================ -->
+
+      <div class="player-modal-visual">
+
+
+        <div class="player-modal-photo-stage">
+
+          <img
+            src="/assets/logo-nav.png"
+            alt=""
+            class="player-modal-photo"
+            data-player-photo
+          >
+
+        </div>
+
+
+        <div class="player-modal-badges">
+
+          <span
+            class="player-modal-category"
+            data-player-category
+          ></span>
+
+          <span
+            class="player-modal-number"
+            data-player-number
+          ></span>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ===============================================
+           INFORMACIÓN
+      ================================================ -->
+
+      <div class="player-modal-info">
+
+
+        <div class="player-modal-title">
+
+          <span class="player-modal-overline">
+            PACKERS CANCÚN
+          </span>
+
+
+          <h2
+            id="player-modal-name"
+            data-player-name
+          ></h2>
+
+
+          <p
+            class="player-modal-position"
+            data-player-position
+          ></p>
+
+        </div>
+
+
+
+        <div class="player-modal-divider"></div>
+
+
+
+        <!-- PERFIL -->
+
+        <section class="player-modal-section">
+
+          <span class="player-modal-section-label">
+            PERFIL
+          </span>
+
+
+          <p
+            class="player-modal-bio"
+            data-player-bio
+          ></p>
+
+        </section>
+
+
+
+        <!-- PLAYER INFO -->
+
+        <section
+          class="player-modal-section hidden"
+          data-player-info-section
+        >
+
+          <span class="player-modal-section-label">
+            PLAYER INFO
+          </span>
+
+
+          <div class="player-info-grid">
+
+
+            <div
+              class="player-info-item hidden"
+              data-player-seasons-wrap
+            >
+
+              <span>
+                Temporadas
+              </span>
+
+              <strong data-player-seasons>
+                0
+              </strong>
+
+            </div>
+
+
+            <div
+              class="player-info-item player-info-achievement hidden"
+              data-player-achievement-wrap
+            >
+
+              <span>
+                Reconocimiento
+              </span>
+
+              <strong data-player-achievement></strong>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- STATS -->
+
+        <section class="player-modal-section">
+
+          <span class="player-modal-section-label">
+            SEASON STATS
+          </span>
+
+
+          <div
+            class="player-stats-grid"
+            data-player-stats
+          ></div>
+
+        </section>
+
+
+
+        <!-- REDES -->
+
+        <section
+          class="player-modal-section hidden"
+          data-player-social-section
+        >
+
+          <span class="player-modal-section-label">
+            SOCIAL & HIGHLIGHTS
+          </span>
+
+
+          <div
+            class="player-social-links"
+            data-player-socials
+          ></div>
+
+        </section>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <footer class="site-footer">
+
     <div class="container">
+
+
       <div class="footer-grid">
+
+
         <div>
+
           <div class="footer-brand">
-            <img src="/assets/logo-nav.png" alt="Escudo de Packers Cancún" />
-            <span>Packers Cancún</span>
+
+            <img
+              src="/assets/logo-nav.png"
+              alt="Packers Cancún"
+            >
+
+            <span>
+              Packers Cancún
+            </span>
+
           </div>
-          <p style="color:var(--bone-200);opacity:.8;max-width:32ch;">Equipo local de tocho bandera. Verde, oro y raíz maya en cada jugada.</p>
+
+
+          <p
+            style="
+              color:var(--bone-200);
+              opacity:.8;
+              max-width:32ch;
+            "
+          >
+
+            Equipo local de tocho bandera.
+            Verde, oro y raíz maya
+            en cada jugada.
+
+          </p>
+
         </div>
+
+
+
         <div class="footer-col">
-          <h4>Secciones</h4>
+
+          <h4>
+            Secciones
+          </h4>
+
           <ul>
-            <li><a href="/partidos.html">Partidos</a></li>
-            <li><a href="/reels.html">Reels</a></li>
-            <li><a href="/categorias.html">Categorías</a></li>
-            <li><a href="/stats.html">Stats</a></li>
+
+            <li>
+              <a href="/partidos.html">
+                Partidos
+              </a>
+            </li>
+
+            <li>
+              <a href="/reels.html">
+                Reels
+              </a>
+            </li>
+
+            <li>
+              <a href="/gallery.html">
+                Galería
+              </a>
+            </li>
+
+            <li>
+              <a href="/categorias.html">
+                Categorías
+              </a>
+            </li>
+
+            <li>
+              <a href="/stats.html">
+                Stats
+              </a>
+            </li>
+
           </ul>
+
         </div>
+
+
+
         <div class="footer-col">
-          <h4>Equipo</h4>
+
+          <h4>
+            Equipo
+          </h4>
+
           <ul>
-            <li><a href="/unete.html">Únete a nosotros</a></li>
-            <li><a href="/index.html#noticias">Noticias</a></li>
+
+            <li>
+              <a href="/unete.html">
+                Únete a nosotros
+              </a>
+            </li>
+
+            <li>
+              <a href="/index.html#noticias">
+                Noticias
+              </a>
+            </li>
+
           </ul>
+
         </div>
+
+
+
         <div class="footer-col">
-          <h4>Contacto</h4>
+
+          <h4>
+            Contacto
+          </h4>
+
           <ul>
-            <li><a href="mailto:contacto@packerscancun.mx">contacto@packerscancun.mx</a></li>
-            <li><a href="https://instagram.com/" target="_blank" rel="noopener">@packerscancun</a></li>
+
+            <li>
+              <a href="mailto:contacto@packerscancun.mx">
+                contacto@packerscancun.mx
+              </a>
+            </li>
+
           </ul>
+
         </div>
+
+
       </div>
+
+
+
       <div class="footer-bottom">
-        <span>© 2026 Packers Cancún. Todos los derechos reservados.</span>
-        <span>Cancún, Quintana Roo, México</span>
+
+        <span>
+          © 2026 Packers Cancún.
+          Todos los derechos reservados.
+        </span>
+
+        <span>
+          Cancún, Quintana Roo, México
+        </span>
+
       </div>
+
+
     </div>
+
   </footer>
 
-  <script type="module" src="/src/ts/stats.ts"></script>
+
+
+  <script
+    type="module"
+    src="/src/ts/stats.ts"
+  ></script>
+
+
 </body>
+
 </html>

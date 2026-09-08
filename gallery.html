@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Galería — Packers Cancún</title>
+
+  <meta
+    name="description"
+    content="Galería de fotografías de Packers Cancún. Partidos, entrenamientos, eventos y momentos especiales del equipo."
+  />
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/assets/favicon-256.png"
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    rel="stylesheet"
+    href="/src/styles/style.css"
+  />
+</head>
+
+<body>
+
+  <!-- ==========================================
+       NAV
+  =========================================== -->
+
+  <header class="site-nav" data-site-nav>
+
+    <div class="container nav-inner">
+
+      <a href="/index.html" class="brand">
+
+        <img
+          src="/assets/logo-nav.png"
+          alt="Escudo de Packers Cancún"
+        />
+
+        <span>Packers Cancún</span>
+
+      </a>
+
+      <nav aria-label="Navegación principal">
+
+        <ul class="nav-links" data-nav-links>
+
+          <li>
+            <a href="/index.html">
+              Inicio
+            </a>
+          </li>
+
+          <li>
+            <a href="/partidos.html">
+              Partidos
+            </a>
+          </li>
+
+          <li>
+            <a href="/reels.html">
+              Reels
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/gallery.html"
+              class="active"
+            >
+              Galería
+            </a>
+          </li>
+
+          <li>
+            <a href="/categorias.html">
+              Categorías
+            </a>
+          </li>
+
+          <li>
+            <a href="/stats.html">
+              Stats
+            </a>
+          </li>
+
+          <li>
+            <a href="/unete.html">
+              Únete a Nosotros
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <a
+        href="/unete.html"
+        class="btn nav-cta"
+      >
+        Únete
+      </a>
+
+      <button
+        class="nav-toggle"
+        data-nav-toggle
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ==========================================
+       HEADER
+  =========================================== -->
+
+  <section class="page-header">
+
+    <div class="container">
+
+      <span class="eyebrow">
+        Momentos Packers
+      </span>
+
+      <h1 class="section-title">
+        Galería
+      </h1>
+
+      <p>
+        Partidos, entrenamientos, eventos y momentos
+        que forman parte de la historia de Packers Cancún.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       GALERÍA
+  =========================================== -->
+
+  <section class="gallery-section">
+
+    <div class="container">
+
+      <div class="gallery-toolbar">
+
+        <div class="gallery-filters">
+
+          <button
+            class="gallery-filter active"
+            data-gallery-filter="Todos"
+          >
+            Todos
+          </button>
+
+          <button
+            class="gallery-filter"
+            data-gallery-filter="Partidos"
+          >
+            Partidos
+          </button>
+
+          <button
+            class="gallery-filter"
+            data-gallery-filter="Entrenamientos"
+          >
+            Entrenamientos
+          </button>
+
+          <button
+            class="gallery-filter"
+            data-gallery-filter="Eventos"
+          >
+            Eventos
+          </button>
+
+          <button
+            class="gallery-filter"
+            data-gallery-filter="Equipo"
+          >
+            Equipo
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="gallery-grid"
+        data-gallery-grid
+      >
+
+        <p class="news-empty">
+          Cargando galería…
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       LIGHTBOX
+  =========================================== -->
+
+  <div
+    class="gallery-lightbox hidden"
+    data-gallery-lightbox
+    aria-hidden="true"
+  >
+
+    <button
+      class="gallery-lightbox-close"
+      data-gallery-close
+      aria-label="Cerrar imagen"
+    >
+      ×
+    </button>
+
+    <button
+      class="gallery-lightbox-prev"
+      data-gallery-prev
+      aria-label="Imagen anterior"
+    >
+      ‹
+    </button>
+
+    <div class="gallery-lightbox-content">
+
+      <img
+        src=""
+        alt=""
+        data-gallery-lightbox-image
+      />
+
+      <div class="gallery-lightbox-info">
+
+        <span
+          class="gallery-lightbox-category"
+          data-gallery-lightbox-category
+        ></span>
+
+        <h2
+          data-gallery-lightbox-title
+        ></h2>
+
+        <p
+          data-gallery-lightbox-description
+        ></p>
+
+      </div>
+
+    </div>
+
+    <button
+      class="gallery-lightbox-next"
+      data-gallery-next
+      aria-label="Imagen siguiente"
+    >
+      ›
+    </button>
+
+  </div>
+
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="footer-brand">
+
+            <img
+              src="/assets/logo-nav.png"
+              alt="Escudo de Packers Cancún"
+            />
+
+            <span>
+              Packers Cancún
+            </span>
+
+          </div>
+
+          <p
+            style="
+              color:var(--bone-200);
+              opacity:.8;
+              max-width:32ch;
+            "
+          >
+            Equipo local de tocho bandera.
+            Verde, oro y raíz maya en cada jugada.
+          </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Secciones
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="/index.html">
+                Inicio
+              </a>
+            </li>
+
+            <li>
+              <a href="/partidos.html">
+                Partidos
+              </a>
+            </li>
+
+            <li>
+              <a href="/reels.html">
+                Reels
+              </a>
+            </li>
+
+            <li>
+              <a href="/gallery.html">
+                Galería
+              </a>
+            </li>
+
+            <li>
+              <a href="/categorias.html">
+                Categorías
+              </a>
+            </li>
+
+            <li>
+              <a href="/stats.html">
+                Stats
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Equipo
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="/unete.html">
+                Únete a nosotros
+              </a>
+            </li>
+
+            <li>
+              <a href="/index.html#noticias">
+                Noticias
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>
+            Contacto
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="mailto:contacto@packerscancun.mx">
+                contacto@packerscancun.mx
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener"
+              >
+                @packerscancun
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Packers Cancún.
+          Todos los derechos reservados.
+        </span>
+
+        <span>
+          Cancún, Quintana Roo, México
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script
+    type="module"
+    src="/src/ts/gallery.ts"
+  ></script>
+
+</body>
+
+</html>

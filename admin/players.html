@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Estadísticas | Packers CMS</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./styles/admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-layout">
+
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="sidebar-logo">
+
+            <img
+                src="/assets/logo-nav.png"
+                alt="Logo Packers Cancún"
+            >
+
+            <div>
+
+                <h2>
+                    Packers CMS
+                </h2>
+
+                <span>
+                    Administración
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <ul>
+
+                <li>
+                    <a href="./dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./news.html">
+                        Noticias
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./matches.html">
+                        Partidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./reels.html">
+                        Reels
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./gallery.html">
+                        Galería
+                    </a>
+                </li>
+
+                <li>
+
+                    <a
+                        href="./players.html"
+                        class="active"
+                    >
+                        Estadísticas
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="./categories.html">
+                        Categorías
+                    </a>
+
+                </li>
+
+                <li>
+                    <a href="./users.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="./settings.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ==========================================
+         CONTENIDO
+    =========================================== -->
+
+    <main class="admin-content">
+
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    Administrar Estadísticas
+                </h1>
+
+                <p>
+                    Gestiona jugadores, perfiles,
+                    estadísticas y MVP semanal.
+                </p>
+
+            </div>
+
+
+            <button
+                class="btn"
+                id="logout-btn"
+                type="button"
+            >
+                Cerrar sesión
+            </button>
+
+        </header>
+
+
+        <section class="dashboard-home">
+
+
+            <!-- ======================================
+                 MVP DE LA SEMANA
+            ======================================= -->
+
+            <div
+                style="
+                    background:#fff;
+                    border-radius:16px;
+                    padding:1.4rem;
+                    margin-bottom:1.5rem;
+                    border:1px solid rgba(0,0,0,.08);
+                "
+            >
+
+                <div
+                    style="
+                        display:flex;
+                        flex-wrap:wrap;
+                        gap:1rem;
+                        align-items:flex-end;
+                        justify-content:space-between;
+                    "
+                >
+
+                    <div>
+
+                        <h2
+                            style="
+                                margin:0 0 .3rem;
+                                font-size:1.1rem;
+                            "
+                        >
+                            MVP de la Semana
+                        </h2>
+
+                        <p
+                            style="
+                                margin:0;
+                                opacity:.65;
+                            "
+                        >
+                            Selecciona al jugador que
+                            aparecerá destacado en Stats.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        style="
+                            display:flex;
+                            flex-wrap:wrap;
+                            align-items:flex-end;
+                            gap:.8rem;
+                        "
+                    >
+
+                        <div>
+
+                            <label
+                                for="weekly-mvp"
+                                style="
+                                    display:block;
+                                    margin-bottom:.35rem;
+                                "
+                            >
+                                Jugador destacado
+                            </label>
+
+                            <select
+                                id="weekly-mvp"
+                                style="
+                                    min-width:240px;
+                                    padding:.7rem 1rem;
+                                "
+                            >
+
+                                <option value="">
+                                    Sin MVP seleccionado
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn"
+                            id="save-mvp-btn"
+                        >
+                            Guardar MVP
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+                 CONTROLES
+            ======================================= -->
+
+            <div
+                style="
+                    display:flex;
+                    flex-wrap:wrap;
+                    gap:1rem;
+                    align-items:center;
+                    margin-bottom:1.5rem;
+                "
+            >
+
+                <button
+                    class="btn"
+                    id="new-player-btn"
+                    type="button"
+                >
+                    + Nuevo jugador
+                </button>
+
+
+                <input
+                    type="search"
+                    id="search-player"
+                    placeholder="Buscar jugador..."
+                    style="
+                        min-width:220px;
+                        padding:.7rem 1rem;
+                    "
+                >
+
+
+                <select
+                    id="filter-category"
+                    style="
+                        padding:.7rem 1rem;
+                    "
+                >
+
+                    <option value="">
+                        Todas las categorías
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ======================================
+                 TABLA
+            ======================================= -->
+
+            <div
+                style="
+                    overflow-x:auto;
+                "
+            >
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Jugador
+                            </th>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Categoría
+                            </th>
+
+                            <th>
+                                Posición
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="players-table">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                style="
+                                    text-align:center;
+                                    padding:2rem;
+                                "
+                            >
+                                Cargando jugadores...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- ======================================
+                 MODAL JUGADOR
+            ======================================= -->
+
+            <div
+                class="modal hidden"
+                id="player-modal"
+            >
+
+                <div class="modal-content">
+
+
+                    <h2 id="player-modal-title">
+                        Nuevo jugador
+                    </h2>
+
+
+                    <form id="player-form">
+
+
+                        <!-- =================================
+                             INFORMACIÓN PRINCIPAL
+                        ================================== -->
+
+                        <h3>
+                            Información principal
+                        </h3>
+
+
+                        <label for="player-name">
+                            Nombre
+                        </label>
+
+                        <input
+                            type="text"
+                            id="player-name"
+                            placeholder="Ej. Juan Pérez"
+                            required
+                        >
+
+
+                        <label for="player-number">
+                            Número
+                        </label>
+
+                        <input
+                            type="number"
+                            id="player-number"
+                            min="0"
+                            max="99"
+                            placeholder="Ej. 12"
+                            required
+                        >
+
+
+                        <label for="player-category">
+                            Categoría
+                        </label>
+
+                        <select
+                            id="player-category"
+                            required
+                        >
+
+                            <option value="">
+                                Cargando categorías...
+                            </option>
+
+                        </select>
+
+
+                        <label for="player-position">
+                            Posición
+                        </label>
+
+                        <input
+                            type="text"
+                            id="player-position"
+                            placeholder="Ej. QB / WR / CB"
+                            required
+                        >
+
+
+                        <!-- =================================
+                             FOTO
+                        ================================== -->
+
+                        <label for="player-photo">
+                            Fotografía del jugador
+                        </label>
+
+                        <input
+                            type="file"
+                            id="player-photo"
+                            accept="image/*"
+                        >
+
+                        <p class="form-note">
+                            La fotografía se almacenará
+                            automáticamente en Cloudinary.
+                        </p>
+
+
+                        <div
+                            id="player-photo-preview"
+                            class="image-preview hidden"
+                        >
+
+                            <img
+                                id="player-photo-preview-img"
+                                src=""
+                                alt="Vista previa del jugador"
+                            >
+
+                        </div>
+
+
+                        <!-- =================================
+                             PERFIL
+                        ================================== -->
+
+                        <h3
+                            style="
+                                margin-top:1.8rem;
+                            "
+                        >
+                            Perfil del jugador
+                        </h3>
+
+
+                        <label for="player-bio">
+                            Biografía
+                        </label>
+
+                        <textarea
+                            id="player-bio"
+                            rows="4"
+                            placeholder="Breve descripción del jugador..."
+                        ></textarea>
+
+
+                        <label for="player-seasons">
+                            Temporadas con Packers
+                        </label>
+
+                        <input
+                            type="number"
+                            id="player-seasons"
+                            min="0"
+                            value="0"
+                            placeholder="Ej. 2"
+                        >
+
+
+                        <label for="player-achievement">
+                            Logro o reconocimiento
+                        </label>
+
+                        <input
+                            type="text"
+                            id="player-achievement"
+                            placeholder="Ej. MVP Jornada 4"
+                        >
+
+
+                        <!-- =================================
+                             REDES / CONTENIDO
+                        ================================== -->
+
+                        <h3
+                            style="
+                                margin-top:1.8rem;
+                            "
+                        >
+                            Redes y contenido
+                        </h3>
+
+
+                        <label for="player-instagram">
+                            Instagram
+                        </label>
+
+                        <input
+                            type="url"
+                            id="player-instagram"
+                            placeholder="https://instagram.com/..."
+                        >
+
+
+                        <label for="player-tiktok">
+                            TikTok
+                        </label>
+
+                        <input
+                            type="url"
+                            id="player-tiktok"
+                            placeholder="https://tiktok.com/@..."
+                        >
+
+
+                        <label for="player-highlights">
+                            Video / Highlights
+                        </label>
+
+                        <input
+                            type="url"
+                            id="player-highlights"
+                            placeholder="https://youtube.com/..."
+                        >
+
+
+                        <p class="form-note">
+                            Todos estos campos son opcionales.
+                            Para categorías infantiles se recomienda
+                            enlazar contenido oficial de Packers
+                            en lugar de cuentas personales.
+                        </p>
+
+
+                        <!-- =================================
+                             ESTADÍSTICAS
+                        ================================== -->
+
+                        <h3
+                            style="
+                                margin-top:1.8rem;
+                            "
+                        >
+                            Estadísticas
+                        </h3>
+
+
+                        <div
+                            style="
+                                display:grid;
+                                grid-template-columns:
+                                    repeat(
+                                        auto-fit,
+                                        minmax(120px,1fr)
+                                    );
+                                gap:1rem;
+                            "
+                        >
+
+
+                            <div>
+
+                                <label for="player-touchdowns">
+                                    Touchdowns
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="player-touchdowns"
+                                    min="0"
+                                    value="0"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label for="player-interceptions">
+                                    Intercepciones
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="player-interceptions"
+                                    min="0"
+                                    value="0"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label for="player-games">
+                                    Partidos jugados
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="player-games"
+                                    min="0"
+                                    value="0"
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================
+                             PUBLICAR
+                        ================================== -->
+
+                        <label
+                            style="
+                                display:flex;
+                                align-items:center;
+                                gap:.6rem;
+                                margin-top:1.5rem;
+                            "
+                        >
+
+                            <input
+                                type="checkbox"
+                                id="player-published"
+                            >
+
+                            Publicar jugador
+
+                        </label>
+
+
+                        <!-- =================================
+                             ACCIONES
+                        ================================== -->
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline"
+                                id="cancel-player"
+                            >
+                                Cancelar
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="btn"
+                            >
+                                Guardar jugador
+                            </button>
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="./ts/modules/players/players.ts"
+></script>
+
+</body>
+
+</html>

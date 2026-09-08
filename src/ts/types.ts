@@ -43,3 +43,21 @@ export interface Reel {
   thumbnail?: string; // ruta dentro de /images
   caption: string;
 }
+
+export interface GalleryItem {
+
+  id?: string;
+
+  title: string;
+
+  description: string;
+
+  imageUrl: string;
+
+  category: string;
+
+  published: boolean;
+
+  createdAt?: any;
+
+}

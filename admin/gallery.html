@@ -97,6 +97,8 @@
                     </a>
                 </li>
 
+                <li><a href="./players.html">Estadísticas</a></li>
+
                 <li>
                     <a href="./users.html">
                         Usuarios
@@ -227,15 +229,25 @@
                             required></textarea>
 
 
-                        <label>
-                            URL de la imagen
-                        </label>
-
-                        <input
-                            type="url"
-                            id="image-url"
-                            placeholder="https://..."
-                            required>
+                            <label>
+                                Imagen
+                            </label>
+                            
+                            <input
+                                type="file"
+                                id="image"
+                                accept="image/*"
+                                required>
+                            
+                            <div
+                                id="image-preview"
+                                class="image-preview hidden">
+                            
+                                <img
+                                    id="image-preview-img"
+                                    alt="Vista previa">
+                            
+                            </div>
 
 
                         <label>

@@ -505,3 +505,28 @@ tbody tr:hover{
     object-fit: contain;
     border-radius: 10px;
 }
+
+/* ==========================================
+   IMAGE PREVIEW
+========================================== */
+
+.image-preview {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 420px;
+    height: 220px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-preview.hidden {
+    display: none;
+}
