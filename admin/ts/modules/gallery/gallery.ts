@@ -1,3 +1,4 @@
+import "../../common";
 import {
     createGalleryItem,
     editGalleryItem,
@@ -424,7 +425,7 @@ async function loadGallery(
                     description.value =
                         galleryItem.description;
 
-                    imageUrl.value =
+                        imageUrl =
                         galleryItem.imageUrl;
 
                     category.value =
