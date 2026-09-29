@@ -1554,7 +1554,12 @@ function renderMvpEditor(): void {
 
     categoryNames.forEach((category) => {
         const wrapper = document.createElement("div");
-        wrapper.style.cssText = "border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;";
+        wrapper.style.cssText =
+    "border:1px solid var(--color-border);" +
+    "border-radius:12px;" +
+    "padding:1rem;" +
+    "background:var(--color-surface-light);" +
+    "color:var(--color-text);";
 
         const label = document.createElement("label");
         label.textContent = `MVP ${category}`;
@@ -1562,7 +1567,13 @@ function renderMvpEditor(): void {
 
         const select = document.createElement("select");
         select.dataset.mvpCategory = category;
-        select.style.cssText = "width:100%;padding:.7rem 1rem;";
+        select.style.cssText =
+    "width:100%;" +
+    "padding:.7rem 1rem;" +
+    "background:var(--color-surface);" +
+    "color:var(--color-text);" +
+    "border:1px solid var(--color-border);" +
+    "border-radius:8px;";
         select.innerHTML = '<option value="">Sin MVP seleccionado</option>';
 
         mvpPlayerOptions

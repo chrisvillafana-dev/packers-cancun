@@ -1703,7 +1703,7 @@
     grid;
 
   grid-template-columns:
-    repeat(3,1fr);
+    repeat(4, minmax(0, 1fr));
 
   gap:
     .6rem;
@@ -3424,3 +3424,14 @@
 .leader-value { color:#f0d474; font-weight:900; font-size:1.05rem; }
 .leader-value small { font-size:.65rem; opacity:.72; }
 @media(max-width:760px){ .leaderboards-grid{grid-template-columns:1fr;} .mvp-category-grid{grid-template-columns:1fr;} }
+
+@media (max-width: 760px) {
+
+  .player-card-stats {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
+
+}

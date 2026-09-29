@@ -1066,29 +1066,11 @@ function createPlayerCard(
 
         <div class="player-card-stats">
 
+  ${createSortedCardStats(
+    player.stats
+  )}
 
-          ${createCardStat(
-            player.stats.touchdowns,
-            "TD",
-            "Touchdowns"
-          )}
-
-
-          ${createCardStat(
-            player.stats.intercepciones,
-            "INT",
-            "Intercepciones"
-          )}
-
-
-          ${createCardStat(
-            player.stats.partidos,
-            "PJ",
-            "Partidos"
-          )}
-
-
-        </div>
+</div>
 
 
         <div class="player-card-action">
@@ -1131,6 +1113,82 @@ function createPlayerCard(
 /* =========================================================
    CARD STAT
 ========================================================= */
+
+function createSortedCardStats(
+  stats: PlayerStats
+): string {
+
+  const availableStats = [
+
+    {
+      value: Number(stats.touchdowns ?? 0),
+      label: "TD",
+      title: "Touchdowns"
+    },
+
+    {
+      value: Number(stats.recepciones ?? 0),
+      label: "REC",
+      title: "Recepciones"
+    },
+
+    {
+      value: Number(stats.flagPulls ?? 0),
+      label: "FP",
+      title: "Flag Pulls"
+    },
+
+    {
+      value: Number(stats.intercepciones ?? 0),
+      label: "INT",
+      title: "Intercepciones"
+    },
+
+    {
+      value: Number(stats.qbTouchdowns ?? 0),
+      label: "QB TD",
+      title: "TD como QB"
+    },
+
+    {
+      value: Number(stats.completions ?? 0),
+      label: "COMP",
+      title: "Pases completos"
+    },
+
+    {
+      value: Number(stats.sacks ?? 0),
+      label: "SACK",
+      title: "Sacks"
+    },
+
+    {
+      value: Number(stats.partidos ?? 0),
+      label: "PJ",
+      title: "Partidos jugados"
+    }
+
+  ];
+
+  return availableStats
+
+    .sort(
+      (a, b) =>
+        b.value - a.value
+    )
+
+    .map(
+      (stat) =>
+        createCardStat(
+          stat.value,
+          stat.label,
+          stat.title
+        )
+    )
+
+    .join("");
+
+}
 
 function createCardStat(
   value: number,
@@ -1442,13 +1500,37 @@ function openPlayerModal(
   );
 
 
-  const modalContent = modal.querySelector<HTMLElement>(".player-modal-content");
-  if (modalContent) modalContent.scrollTop = 0;
-  modal.scrollTop = 0;
-
-  modal.classList.remove(
-    "hidden"
+  const modalContent =
+  modal.querySelector<HTMLElement>(
+    ".player-modal-content"
   );
+
+const modalInfo =
+  modal.querySelector<HTMLElement>(
+    ".player-modal-info"
+  );
+
+
+modal.classList.remove(
+  "hidden"
+);
+
+
+requestAnimationFrame(
+  () => {
+
+    modal.scrollTop = 0;
+
+    if (modalContent) {
+      modalContent.scrollTop = 0;
+    }
+
+    if (modalInfo) {
+      modalInfo.scrollTop = 0;
+    }
+
+  }
+);
 
 
   modal.setAttribute(

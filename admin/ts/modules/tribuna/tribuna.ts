@@ -17,9 +17,39 @@ function render():void{
   const value=filter.value; const visible=value==="all"?items:items.filter(i=>i.status===value); count.textContent=`${visible.length} mensajes`; list.innerHTML="";
   if(!visible.length){list.innerHTML="<p>No hay mensajes en esta vista.</p>";return;}
   visible.forEach(item=>{
-    const card=document.createElement("article"); card.style.cssText="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:1rem;";
-    const name=document.createElement("strong"); name.textContent=item.displayName; const msg=document.createElement("p"); msg.textContent=item.message; msg.style.whiteSpace="pre-wrap";
-    const state=document.createElement("small"); state.textContent=`Estado: ${item.status}`;
+    const card=document.createElement("article"); card.style.cssText =
+    "background:var(--color-surface);" +
+    "color:var(--color-text);" +
+    "border:1px solid var(--color-border);" +
+    "border-radius:14px;" +
+    "padding:1rem;" +
+    "box-shadow:var(--shadow-sm);";
+    const name=document.createElement("strong"); name.textContent=item.displayName; name.style.color =
+    "var(--color-text)"; const msg =
+    document.createElement("p");
+
+  msg.textContent =
+    item.message;
+
+  msg.style.whiteSpace =
+    "pre-wrap";
+
+  msg.style.color =
+    "var(--color-text-secondary)";
+
+  msg.style.marginTop =
+    ".75rem";
+
+  msg.style.lineHeight =
+    "1.6";
+    const state=document.createElement("small"); state.textContent=`Estado: ${item.status}`; state.style.display =
+    "block";
+
+  state.style.marginTop =
+    ".35rem";
+
+  state.style.color =
+    "var(--color-text-muted)";
     const actions=document.createElement("div"); actions.style.cssText="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem";
     const make=(label:string,fn:()=>void)=>{const b=document.createElement("button");b.className="btn";b.type="button";b.textContent=label;b.addEventListener("click",fn);return b;};
     actions.append(make("Aprobar",()=>setStatus(item.id,"approved")),make("Rechazar",()=>setStatus(item.id,"rejected")),make("Eliminar",()=>remove(item.id)));
