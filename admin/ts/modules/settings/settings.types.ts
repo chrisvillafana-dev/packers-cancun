@@ -16,6 +16,8 @@ export interface SiteSettings {
 
     facebook: string;
 
+    youtube?: string;
+
     website: string;
 
     siteActive: boolean;

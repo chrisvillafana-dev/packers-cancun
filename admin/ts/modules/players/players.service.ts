@@ -234,9 +234,9 @@ export async function getStatsSettings() {
    GUARDAR MVP
 ========================================== */
 
-export async function setWeeklyMvp(
+export async function setWeeklyMvps(
 
-    playerId: string
+    weeklyMvps: Record<string, string>
 
 ) {
 
@@ -254,8 +254,7 @@ export async function setWeeklyMvp(
 
         {
 
-            weeklyMvp:
-                playerId,
+            weeklyMvps,
 
             updatedAt:
                 serverTimestamp()

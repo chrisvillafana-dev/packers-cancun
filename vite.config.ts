@@ -41,6 +41,11 @@ export default defineConfig({
           "unete.html"
         ),
 
+        tribuna: resolve(
+          __dirname,
+          "tribuna.html"
+        ),
+
 
         /* ==========================================
            CMS
@@ -89,6 +94,11 @@ export default defineConfig({
         adminRequests: resolve(
           __dirname,
           "admin/requests.html"
+        ),
+
+        adminTribuna: resolve(
+          __dirname,
+          "admin/tribuna.html"
         ),
 
         adminUsers: resolve(

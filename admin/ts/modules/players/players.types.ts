@@ -20,6 +20,16 @@ export interface Player {
 
     gamesPlayed: number;
 
+    receptions?: number;
+
+    flagPulls?: number;
+
+    qbTouchdowns?: number;
+
+    completions?: number;
+
+    sacks?: number;
+
     seasons?: number;
 
     achievement?: string;

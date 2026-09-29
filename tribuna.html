@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Tribuna Packers — Packers Cancún</title>
+  <meta name="description" content="Comparte tu mensaje con Packers Cancún y forma parte de la tribuna del equipo.">
+  <link rel="icon" type="image/png" href="/assets/favicon-256.png">
+  <link rel="stylesheet" href="/src/styles/style.css">
+  <link rel="stylesheet" href="/src/styles/tribuna.css">
+</head>
+<body>
+<header class="site-nav" data-site-nav>
+  <div class="container nav-inner">
+    <a href="/index.html" class="brand"><img src="/assets/logo-nav.png" alt="Packers Cancún"><span>Packers Cancún</span></a>
+    <nav aria-label="Navegación principal"><ul class="nav-links" data-nav-links>
+      <li><a href="/index.html">Inicio</a></li><li><a href="/partidos.html">Partidos</a></li><li><a href="/reels.html">Reels</a></li><li><a href="/gallery.html">Galería</a></li><li><a href="/categorias.html">Categorías</a></li><li><a href="/stats.html">Stats</a></li><li><a href="/tribuna.html" aria-current="page">Tribuna</a></li><li><a href="/unete.html">Únete</a></li>
+    </ul></nav>
+    <button class="nav-toggle" data-nav-toggle aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+  <section class="tribuna-hero"><div class="container"><span class="tribuna-kicker">LA VOZ DE NUESTRA COMUNIDAD</span><h1>La Tribuna <span>Packers</span></h1><p>Felicita a un jugador, comparte tu apoyo o cuéntanos cómo viviste la jornada. Tu voz también juega.</p></div></section>
+  <section class="tribuna-main"><div class="container tribuna-layout">
+    <aside class="tribuna-form-card">
+      <span class="tribuna-card-kicker">ENVÍA TU MENSAJE</span><h2>Hazte escuchar</h2><p>Los mensajes son revisados antes de publicarse para mantener una comunidad positiva y segura.</p>
+      <form id="tribuna-form" novalidate>
+        <label for="tribuna-name">Nombre o apodo</label><input id="tribuna-name" type="text" maxlength="40" required autocomplete="name" placeholder="Ej. Ana P.">
+        <label for="tribuna-message">Tu mensaje</label><textarea id="tribuna-message" rows="6" maxlength="300" required placeholder="Escribe tu mensaje para Packers Cancún..."></textarea>
+        <div class="tribuna-counter"><span id="tribuna-count">0</span>/300</div>
+        <input id="tribuna-website" class="tribuna-honeypot" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="tribuna-consent"><input id="tribuna-consent" type="checkbox" required><span>Acepto que mi nombre o apodo y mensaje puedan mostrarse públicamente si son aprobados por Packers Cancún.</span></label>
+        <button class="btn" type="submit" id="tribuna-submit">Enviar a la Tribuna</button>
+        <p id="tribuna-status" class="tribuna-status" aria-live="polite"></p>
+      </form>
+    </aside>
+    <section class="tribuna-feed"><div class="tribuna-feed-head"><div><span class="tribuna-card-kicker">MENSAJES APROBADOS</span><h2>Desde las gradas</h2></div><span class="tribuna-live">● PACKERS COMMUNITY</span></div><div id="tribuna-messages" class="tribuna-grid"><div class="tribuna-loading">Cargando mensajes...</div></div></section>
+  </div></section>
+</main>
+<footer class="site-footer"><div class="container"><div class="footer-brand"><img src="/assets/logo-nav.png" alt="Packers Cancún"><span>Packers Cancún</span></div><p>Disciplina · Equipo · Pasión · Cancún</p></div></footer>
+<script type="module" src="/src/ts/tribuna.ts"></script>
+</body>
+</html>

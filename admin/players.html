@@ -144,6 +144,9 @@
                 </li>
 
                 <li>
+                    <a href="./tribuna.html">Tribuna</a></li>
+
+                <li>
                     <a href="./users.html">
                         Usuarios
                     </a>
@@ -200,105 +203,21 @@
 
 
             <!-- ======================================
-                 MVP DE LA SEMANA
+                 MVP POR CATEGORÍA
             ======================================= -->
 
             <div
-                style="
-                    background:#fff;
-                    border-radius:16px;
-                    padding:1.4rem;
-                    margin-bottom:1.5rem;
-                    border:1px solid rgba(0,0,0,.08);
-                "
+                style="background:#fff;border-radius:16px;padding:1.4rem;margin-bottom:1.5rem;border:1px solid rgba(0,0,0,.08);"
             >
-
-                <div
-                    style="
-                        display:flex;
-                        flex-wrap:wrap;
-                        gap:1rem;
-                        align-items:flex-end;
-                        justify-content:space-between;
-                    "
-                >
-
+                <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;margin-bottom:1rem;">
                     <div>
-
-                        <h2
-                            style="
-                                margin:0 0 .3rem;
-                                font-size:1.1rem;
-                            "
-                        >
-                            MVP de la Semana
-                        </h2>
-
-                        <p
-                            style="
-                                margin:0;
-                                opacity:.65;
-                            "
-                        >
-                            Selecciona al jugador que
-                            aparecerá destacado en Stats.
-                        </p>
-
+                        <h2 style="margin:0 0 .3rem;font-size:1.1rem;">MVP de la Jornada por Categoría</h2>
+                        <p style="margin:0;opacity:.65;">Selecciona un MVP distinto para cada categoría publicada.</p>
                     </div>
-
-
-                    <div
-                        style="
-                            display:flex;
-                            flex-wrap:wrap;
-                            align-items:flex-end;
-                            gap:.8rem;
-                        "
-                    >
-
-                        <div>
-
-                            <label
-                                for="weekly-mvp"
-                                style="
-                                    display:block;
-                                    margin-bottom:.35rem;
-                                "
-                            >
-                                Jugador destacado
-                            </label>
-
-                            <select
-                                id="weekly-mvp"
-                                style="
-                                    min-width:240px;
-                                    padding:.7rem 1rem;
-                                "
-                            >
-
-                                <option value="">
-                                    Sin MVP seleccionado
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="btn"
-                            id="save-mvp-btn"
-                        >
-                            Guardar MVP
-                        </button>
-
-                    </div>
-
+                    <button type="button" class="btn" id="save-mvps-btn">Guardar MVP por categoría</button>
                 </div>
-
+                <div id="mvp-by-category" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;"></div>
             </div>
-
 
             <!-- ======================================
                  CONTROLES
@@ -708,6 +627,32 @@
                                     value="0"
                                 >
 
+                            </div>
+
+
+                            <div>
+                                <label for="player-receptions">Recepciones</label>
+                                <input type="number" id="player-receptions" min="0" value="0">
+                            </div>
+
+                            <div>
+                                <label for="player-flag-pulls">Flag Pulls</label>
+                                <input type="number" id="player-flag-pulls" min="0" value="0">
+                            </div>
+
+                            <div>
+                                <label for="player-qb-touchdowns">TD como QB</label>
+                                <input type="number" id="player-qb-touchdowns" min="0" value="0">
+                            </div>
+
+                            <div>
+                                <label for="player-completions">Pases completos</label>
+                                <input type="number" id="player-completions" min="0" value="0">
+                            </div>
+
+                            <div>
+                                <label for="player-sacks">Sacks</label>
+                                <input type="number" id="player-sacks" min="0" value="0">
                             </div>
 
 

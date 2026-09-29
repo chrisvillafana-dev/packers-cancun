@@ -15,7 +15,7 @@ import {
 
     getStatsSettings,
 
-    setWeeklyMvp
+    setWeeklyMvps
 
 } from "./players.service";
 
@@ -193,6 +193,12 @@ const gamesPlayedInput =
         "#player-games"
     ) as HTMLInputElement;
 
+const receptionsInput = document.querySelector("#player-receptions") as HTMLInputElement;
+const flagPullsInput = document.querySelector("#player-flag-pulls") as HTMLInputElement;
+const qbTouchdownsInput = document.querySelector("#player-qb-touchdowns") as HTMLInputElement;
+const completionsInput = document.querySelector("#player-completions") as HTMLInputElement;
+const sacksInput = document.querySelector("#player-sacks") as HTMLInputElement;
+
 
 const publishedInput =
     document.querySelector(
@@ -200,15 +206,14 @@ const publishedInput =
     ) as HTMLInputElement;
 
 
-const weeklyMvpInput =
+const mvpByCategoryContainer =
     document.querySelector(
-        "#weekly-mvp"
-    ) as HTMLSelectElement;
+        "#mvp-by-category"
+    ) as HTMLDivElement;
 
-
-const saveMvpButton =
+const saveMvpsButton =
     document.querySelector(
-        "#save-mvp-btn"
+        "#save-mvps-btn"
     ) as HTMLButtonElement;
 
 
@@ -778,6 +783,11 @@ form.addEventListener(
                         gamesPlayedInput.value
                     ) || 0,
 
+                receptions: Number(receptionsInput.value) || 0,
+                flagPulls: Number(flagPullsInput.value) || 0,
+                qbTouchdowns: Number(qbTouchdownsInput.value) || 0,
+                completions: Number(completionsInput.value) || 0,
+                sacks: Number(sacksInput.value) || 0,
 
                 published:
                     publishedInput.checked
@@ -922,15 +932,6 @@ async function loadPlayers(): Promise<void> {
         "";
 
 
-    weeklyMvpInput.innerHTML = `
-
-        <option value="">
-            Sin MVP seleccionado
-        </option>
-
-    `;
-
-
     try {
 
         const snapshot =
@@ -966,35 +967,6 @@ async function loadPlayers(): Promise<void> {
                         ${player.number ?? ""}
 
                     `);
-
-
-                /* ==============================
-                   MVP SELECT
-                ============================== */
-
-                if (
-                    player.published === true
-                ) {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-
-                    option.value =
-                        item.id;
-
-
-                    option.textContent =
-                        `#${player.number ?? ""} — ${player.name || "Jugador"} · ${player.category || ""}`;
-
-
-                    weeklyMvpInput.appendChild(
-                        option
-                    );
-
-                }
 
 
                 /* ==============================
@@ -1343,6 +1315,11 @@ async function loadPlayers(): Promise<void> {
                                 0
                             );
 
+                        receptionsInput.value = String(player.receptions ?? 0);
+                        flagPullsInput.value = String(player.flagPulls ?? 0);
+                        qbTouchdownsInput.value = String(player.qbTouchdowns ?? 0);
+                        completionsInput.value = String(player.completions ?? 0);
+                        sacksInput.value = String(player.sacks ?? 0);
 
                         publishedInput.checked =
                             player.published === true;
@@ -1492,8 +1469,6 @@ async function loadPlayers(): Promise<void> {
         }
 
 
-        await loadCurrentMvp();
-
 
     } catch (error) {
 
@@ -1530,136 +1505,103 @@ async function loadPlayers(): Promise<void> {
 
 
 /* ==========================================
-   MVP ACTUAL
+   MVP POR CATEGORÍA
 ========================================== */
 
-async function loadCurrentMvp(): Promise<void> {
+type MvpPlayerOption = { id: string; name: string; number: string; category: string; published: boolean };
+let mvpPlayerOptions: MvpPlayerOption[] = [];
+let currentWeeklyMvps: Record<string, string> = {};
 
-    try {
+async function loadMvpEditor(): Promise<void> {
+    const [playersSnapshot, settingsSnapshot] = await Promise.all([
+        getPlayers(),
+        getStatsSettings()
+    ]);
 
-        const settings =
-            await getStatsSettings();
-
-
-        if (
-            settings.exists()
-        ) {
-
-            const data =
-                settings.data();
-
-
-            const playerId =
-                String(
-                    data.weeklyMvp ||
-                    ""
-                );
-
-
-            if (
-                playerId &&
-                Array.from(
-                    weeklyMvpInput.options
-                ).some(
-                    option =>
-                        option.value ===
-                        playerId
-                )
-            ) {
-
-                weeklyMvpInput.value =
-                    playerId;
-
-            }
-
+    mvpPlayerOptions = [];
+    playersSnapshot.forEach((item) => {
+        const player = item.data();
+        if (player.published === true) {
+            mvpPlayerOptions.push({
+                id: item.id,
+                name: String(player.name || "Jugador"),
+                number: String(player.number ?? ""),
+                category: String(player.category || ""),
+                published: true
+            });
         }
+    });
 
-
-    } catch (error) {
-
-        console.warn(
-            "No se pudo cargar el MVP:",
-            error
-        );
-
+    currentWeeklyMvps = {};
+    if (settingsSnapshot.exists()) {
+        const data = settingsSnapshot.data();
+        if (data.weeklyMvps && typeof data.weeklyMvps === "object") {
+            currentWeeklyMvps = data.weeklyMvps as Record<string, string>;
+        } else if (data.weeklyMvp) {
+            const legacy = mvpPlayerOptions.find((player) => player.id === String(data.weeklyMvp));
+            if (legacy?.category) currentWeeklyMvps[legacy.category] = legacy.id;
+        }
     }
 
+    renderMvpEditor();
 }
 
+function renderMvpEditor(): void {
+    if (!mvpByCategoryContainer) return;
 
-/* ==========================================
-   GUARDAR MVP
-========================================== */
+    const categoryNames = Array.from(new Set(mvpPlayerOptions.map((player) => player.category).filter(Boolean)));
+    mvpByCategoryContainer.innerHTML = "";
 
-saveMvpButton.addEventListener(
-    "click",
-    async () => {
+    categoryNames.forEach((category) => {
+        const wrapper = document.createElement("div");
+        wrapper.style.cssText = "border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:1rem;";
 
-        const playerId =
-            weeklyMvpInput.value;
+        const label = document.createElement("label");
+        label.textContent = `MVP ${category}`;
+        label.style.cssText = "display:block;font-weight:700;margin-bottom:.45rem;";
 
+        const select = document.createElement("select");
+        select.dataset.mvpCategory = category;
+        select.style.cssText = "width:100%;padding:.7rem 1rem;";
+        select.innerHTML = '<option value="">Sin MVP seleccionado</option>';
 
-        if (!playerId) {
+        mvpPlayerOptions
+            .filter((player) => player.category === category)
+            .sort((a,b) => a.name.localeCompare(b.name,"es"))
+            .forEach((player) => {
+                const option = document.createElement("option");
+                option.value = player.id;
+                option.textContent = `#${player.number} — ${player.name}`;
+                select.appendChild(option);
+            });
 
-            alert(
-                "Selecciona un jugador para el MVP."
-            );
+        select.value = currentWeeklyMvps[category] || "";
+        wrapper.append(label, select);
+        mvpByCategoryContainer.appendChild(wrapper);
+    });
+}
 
-            return;
+saveMvpsButton.addEventListener("click", async () => {
+    const weeklyMvps: Record<string, string> = {};
+    mvpByCategoryContainer.querySelectorAll<HTMLSelectElement>("select[data-mvp-category]").forEach((select) => {
+        const category = select.dataset.mvpCategory || "";
+        if (category && select.value) weeklyMvps[category] = select.value;
+    });
 
-        }
-
-
-        try {
-
-            saveMvpButton.disabled =
-                true;
-
-
-            saveMvpButton.textContent =
-                "Guardando...";
-
-
-            await setWeeklyMvp(
-                playerId
-            );
-
-
-            alert(
-                "MVP de la semana actualizado correctamente."
-            );
-
-
-        } catch (error: any) {
-
-            console.error(
-                "Error guardando MVP:",
-                error
-            );
-
-
-            alert(
-                `No se pudo guardar el MVP: ${
-                    error?.message ||
-                    "Error desconocido"
-                }`
-            );
-
-
-        } finally {
-
-            saveMvpButton.disabled =
-                false;
-
-
-            saveMvpButton.textContent =
-                "Guardar MVP";
-
-        }
-
+    try {
+        saveMvpsButton.disabled = true;
+        saveMvpsButton.textContent = "Guardando...";
+        await setWeeklyMvps(weeklyMvps);
+        currentWeeklyMvps = weeklyMvps;
+        alert("MVP por categoría actualizado correctamente.");
+    } catch (error: any) {
+        console.error("Error guardando MVP por categoría:", error);
+        alert(`No se pudo guardar el MVP: ${error?.message || "Error desconocido"}`);
+    } finally {
+        saveMvpsButton.disabled = false;
+        saveMvpsButton.textContent = "Guardar MVP por categoría";
     }
-);
-
+});
 
 /* ==========================================
    BUSCADOR
@@ -1754,6 +1696,8 @@ async function init(): Promise<void> {
     await loadCategories();
 
     await loadPlayers();
+
+    await loadMvpEditor();
 
 }
 

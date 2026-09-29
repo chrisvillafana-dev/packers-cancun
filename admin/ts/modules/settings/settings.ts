@@ -58,6 +58,8 @@ const facebook =
         "#facebook"
     ) as HTMLInputElement;
 
+const youtube = document.querySelector("#youtube") as HTMLInputElement;
+
 
 const website =
     document.querySelector(
@@ -113,6 +115,8 @@ async function loadSettings() {
 
         facebook.value =
             settings.facebook || "";
+
+        youtube.value = settings.youtube || "";
 
         website.value =
             settings.website || "";
@@ -172,6 +176,9 @@ form.addEventListener(
 
                 facebook:
                     facebook.value.trim(),
+
+                youtube:
+                    youtube.value.trim(),
 
                 website:
                     website.value.trim(),

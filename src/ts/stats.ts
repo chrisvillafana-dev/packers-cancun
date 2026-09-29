@@ -23,8 +23,10 @@ interface PlayerStats {
   intercepciones: number;
   partidos: number;
   recepciones?: number;
-  yardas?: number;
-  tackles?: number;
+  flagPulls?: number;
+  qbTouchdowns?: number;
+  completions?: number;
+  sacks?: number;
 }
 
 
@@ -80,8 +82,7 @@ let activeCategory =
 let searchTerm =
   "";
 
-let weeklyMvpId =
-  "";
+let weeklyMvps: Record<string, string> = {};
 
 
 /* =========================================================
@@ -110,59 +111,12 @@ const filtersContainer =
 
 
 /* =========================================================
-   MVP
+   MVP / LÍDERES
 ========================================================= */
 
-const mvpSection =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-section]"
-  );
-
-const mvpCard =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-card]"
-  );
-
-const mvpPhoto =
-  document.querySelector<HTMLImageElement>(
-    "[data-mvp-photo]"
-  );
-
-const mvpCategory =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-category]"
-  );
-
-const mvpNumber =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-number]"
-  );
-
-const mvpName =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-name]"
-  );
-
-const mvpPosition =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-position]"
-  );
-
-const mvpAchievement =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-achievement]"
-  );
-
-const mvpStats =
-  document.querySelector<HTMLElement>(
-    "[data-mvp-stats]"
-  );
-
-const mvpOpenButton =
-  document.querySelector<HTMLButtonElement>(
-    "[data-mvp-open]"
-  );
-
+const mvpSection = document.querySelector<HTMLElement>("[data-mvp-section]");
+const mvpGrid = document.querySelector<HTMLElement>("[data-mvp-grid]");
+const leaderboards = document.querySelector<HTMLElement>("[data-leaderboards]");
 
 /* =========================================================
    MODAL
@@ -252,9 +206,10 @@ async function init(): Promise<void> {
 
   await Promise.all([
     loadPlayers(),
-    loadCategories(),
-    loadStatsSettings()
+    loadCategories()
   ]);
+
+  await loadStatsSettings();
 
   sortPlayers();
 
@@ -262,6 +217,7 @@ async function init(): Promise<void> {
 
   renderPlayers();
 
+  renderLeaderboards();
   renderWeeklyMvp();
 
 }
@@ -329,23 +285,11 @@ async function loadPlayers(): Promise<void> {
                 0
               ),
 
-            recepciones:
-              numberOrUndefined(
-                storedStats.recepciones ??
-                data.receptions
-              ),
-
-            yardas:
-              numberOrUndefined(
-                storedStats.yardas ??
-                data.yards
-              ),
-
-            tackles:
-              numberOrUndefined(
-                storedStats.tackles ??
-                data.tackles
-              )
+            recepciones: numberOrUndefined(storedStats.recepciones ?? data.receptions),
+            flagPulls: numberOrUndefined(storedStats.flagPulls ?? data.flagPulls),
+            qbTouchdowns: numberOrUndefined(storedStats.qbTouchdowns ?? data.qbTouchdowns),
+            completions: numberOrUndefined(storedStats.completions ?? data.completions),
+            sacks: numberOrUndefined(storedStats.sacks ?? data.sacks)
 
           };
 
@@ -556,11 +500,13 @@ async function loadStatsSettings(): Promise<void> {
       snapshot.exists()
     ) {
 
-      weeklyMvpId =
-        String(
-          snapshot.data().weeklyMvp ||
-          ""
-        );
+      const data = snapshot.data();
+      if (data.weeklyMvps && typeof data.weeklyMvps === "object") {
+        weeklyMvps = data.weeklyMvps as Record<string, string>;
+      } else if (data.weeklyMvp) {
+        const legacy = players.find((player) => player.id === String(data.weeklyMvp));
+        if (legacy?.category) weeklyMvps[legacy.category] = legacy.id;
+      }
 
     }
 
@@ -1325,200 +1271,83 @@ function bindPlayerCards(): void {
 ========================================================= */
 
 function renderWeeklyMvp(): void {
+  if (!mvpSection || !mvpGrid) return;
 
-  if (
-    !mvpSection ||
-    !weeklyMvpId
-  ) {
+  const entries = Object.entries(weeklyMvps)
+    .map(([category, playerId]) => ({ category, player: players.find((item) => item.id === playerId) }))
+    .filter((item): item is { category: string; player: Player } => Boolean(item.player));
 
-    mvpSection?.classList.add(
-      "hidden"
-    );
-
+  if (!entries.length) {
+    mvpSection.classList.add("hidden");
     return;
-
   }
 
+  mvpGrid.innerHTML = entries.map(({ category, player }) => `
+    <article class="mvp-category-card" data-player-id="${escapeAttribute(player.id)}">
+      <div class="mvp-gold-ring">
+        <img src="${escapeAttribute(player.photo || DEFAULT_PHOTO)}" alt="${escapeAttribute(player.name)}">
+      </div>
+      <span class="mvp-category-label">MVP ${escapeHtml(category)}</span>
+      <h3>${escapeHtml(player.name)}</h3>
+      <p>#${escapeHtml(player.number || "00")} · ${escapeHtml(player.position || "Jugador")}</p>
+      <div class="mvp-mini-stats">
+        <span><strong>${player.stats.touchdowns}</strong> TD</span>
+        <span><strong>${player.stats.flagPulls ?? 0}</strong> FP</span>
+        <span><strong>${player.stats.intercepciones}</strong> INT</span>
+      </div>
+      <button type="button" class="mvp-profile-button">Ver perfil completo →</button>
+    </article>
+  `).join("");
 
-  const player =
-    players.find(
-      (item) =>
-        item.id ===
-        weeklyMvpId
-    );
+  mvpGrid.querySelectorAll<HTMLElement>("[data-player-id]").forEach((card) => {
+    card.querySelector("button")?.addEventListener("click", () => {
+      const player = players.find((item) => item.id === card.dataset.playerId);
+      if (player) openPlayerModal(player);
+    });
+  });
 
+  mvpSection.classList.remove("hidden");
+}
 
-  if (!player) {
+function renderLeaderboards(): void {
+  if (!leaderboards) return;
+  const boards = [
+    { key: "touchdowns" as const, title: "Touchdowns", unit: "TD" },
+    { key: "flagPulls" as const, title: "Flag Pulls", unit: "FP" },
+    { key: "intercepciones" as const, title: "Intercepciones", unit: "INT" },
+    { key: "qbTouchdowns" as const, title: "TD como QB", unit: "QB TD" }
+  ];
 
-    mvpSection.classList.add(
-      "hidden"
-    );
+  leaderboards.innerHTML = boards.map((board) => {
+    const top = [...players]
+      .sort((a,b) => Number(b.stats[board.key] ?? 0) - Number(a.stats[board.key] ?? 0))
+      .slice(0,3);
 
-    return;
-
-  }
-
-
-  mvpSection.classList.remove(
-    "hidden"
-  );
-
-
-  if (mvpPhoto) {
-
-    mvpPhoto.src =
-      player.photo ||
-      DEFAULT_PHOTO;
-
-    mvpPhoto.alt =
-      player.name;
-
-    mvpPhoto.onerror =
-      () => {
-
-        mvpPhoto.src =
-          DEFAULT_PHOTO;
-
-        mvpPhoto.onerror =
-          null;
-
-      };
-
-  }
-
-
-  if (mvpCategory) {
-
-    mvpCategory.textContent =
-      player.category;
-
-  }
-
-
-  if (mvpNumber) {
-
-    mvpNumber.textContent =
-      `#${player.number || "00"}`;
-
-  }
-
-
-  if (mvpName) {
-
-    mvpName.textContent =
-      player.name;
-
-  }
-
-
-  if (mvpPosition) {
-
-    mvpPosition.textContent =
-      player.position ||
-      "Jugador";
-
-  }
-
-
-  if (
-    mvpAchievement &&
-    player.achievement
-  ) {
-
-    mvpAchievement.textContent =
-      player.achievement;
-
-    mvpAchievement.classList.remove(
-      "hidden"
-    );
-
-
-  } else {
-
-    mvpAchievement?.classList.add(
-      "hidden"
-    );
-
-  }
-
-
-  if (mvpStats) {
-
-    mvpStats.innerHTML = `
-
-      ${createMvpStat(
-        player.stats.touchdowns,
-        "TD"
-      )}
-
-      ${createMvpStat(
-        player.stats.intercepciones,
-        "INT"
-      )}
-
-      ${createMvpStat(
-        player.stats.partidos,
-        "PJ"
-      )}
-
+    return `
+      <article class="leaderboard-card">
+        <span class="leaderboard-kicker">TOP 3</span>
+        <h3>${escapeHtml(board.title)}</h3>
+        <div class="leaderboard-list">
+          ${top.map((player,index) => `
+            <button type="button" class="leader-row" data-player-id="${escapeAttribute(player.id)}">
+              <span class="leader-rank">${index + 1}</span>
+              <img src="${escapeAttribute(player.photo || DEFAULT_PHOTO)}" alt="">
+              <span class="leader-name"><strong>${escapeHtml(player.name)}</strong><small>${escapeHtml(player.category)}</small></span>
+              <span class="leader-value">${Number(player.stats[board.key] ?? 0)} <small>${escapeHtml(board.unit)}</small></span>
+            </button>
+          `).join("")}
+        </div>
+      </article>
     `;
+  }).join("");
 
-  }
-
-
-  if (mvpCard) {
-
-    mvpCard.dataset.playerId =
-      player.id;
-
-  }
-
-
-  if (mvpOpenButton) {
-
-    mvpOpenButton.onclick =
-      () => {
-
-        openPlayerModal(
-          player
-        );
-
-      };
-
-  }
-
+  leaderboards.querySelectorAll<HTMLElement>("[data-player-id]").forEach((row) => {
+    row.addEventListener("click", () => {
+      const player = players.find((item) => item.id === row.dataset.playerId);
+      if (player) openPlayerModal(player);
+    });
+  });
 }
-
-
-/* =========================================================
-   MVP STAT
-========================================================= */
-
-function createMvpStat(
-  value: number,
-  label: string
-): string {
-
-  return `
-
-    <div>
-
-      <strong>
-        ${value}
-      </strong>
-
-      <span>
-        ${escapeHtml(
-          label
-        )}
-      </span>
-
-    </div>
-
-  `;
-
-}
-
 
 /* =========================================================
    ABRIR MODAL
@@ -1612,6 +1441,10 @@ function openPlayerModal(
     player
   );
 
+
+  const modalContent = modal.querySelector<HTMLElement>(".player-modal-content");
+  if (modalContent) modalContent.scrollTop = 0;
+  modal.scrollTop = 0;
 
   modal.classList.remove(
     "hidden"
@@ -2072,27 +1905,10 @@ function renderModalStats(
         stats.recepciones
     },
 
-    {
-      label:
-        "Yardas",
-
-      abbreviation:
-        "YDS",
-
-      value:
-        stats.yardas
-    },
-
-    {
-      label:
-        "Tackles",
-
-      abbreviation:
-        "TKL",
-
-      value:
-        stats.tackles
-    }
+    { label: "Flag Pulls", abbreviation: "FP", value: stats.flagPulls },
+    { label: "TD como QB", abbreviation: "QB TD", value: stats.qbTouchdowns },
+    { label: "Pases completos", abbreviation: "COMP", value: stats.completions },
+    { label: "Sacks", abbreviation: "SACK", value: stats.sacks }
 
   ].filter(
     (
